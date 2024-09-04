@@ -1,0 +1,5 @@
+[
+    ["id", "name", "active", "points"],
+    [1, "Saumil", true, 2.5],
+    [2, "Ramesh", false, 1.6]
+]

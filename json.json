@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "name": "Saumil",
+        "active": true,
+        "points": 2.5
+    },
+    {
+        "id": 2,
+        "name": "Ramesh",
+        "active": false,
+        "points": 1.6
+    }
+]

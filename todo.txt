@@ -1,0 +1,5 @@
+json lines - each line is a json object
+json array - first json array is columns, and all other arrays are values
+regular json array of objects
+csv - regular csv
+native - binary file with json file indicating it's structure

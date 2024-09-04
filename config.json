@@ -1,0 +1,32 @@
+{
+    "all_columns": true,
+    "use_default_columns": true,
+    "default_columns": ["a","b","c","d"],
+    "selected_columns": ["id"],
+    "native_columns": [
+        {
+            "name": "id",
+            "dtype": "u_int",
+            "offset": 0,
+            "length": 4
+        },
+        {
+            "name": "name",
+            "dtype": "char",
+            "offset": 4,
+            "length": 6
+        },
+        {
+            "name": "active",
+            "dtype": "bool",
+            "offset": 10,
+            "length": 1
+        },
+        {
+            "name": "points",
+            "dtype": "float",
+            "offset": 11,
+            "length": 8
+        }
+    ]
+}
