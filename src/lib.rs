@@ -90,10 +90,17 @@ pub struct Settings {
 
 impl Reader {
     pub fn new(settings_path: String) -> Reader {
-        let settings_file = fs::read_to_string(settings_path).unwrap();
+        let settings_file = fs::read_to_string(&settings_path).unwrap();
         let settings: Settings = serde_json::from_str(&settings_file).unwrap();
 
-        let config_file = fs::read_to_string(&settings.config_path).unwrap();
+        let mut config_path = settings.config_path.clone();
+        // make config path absolute from settings path
+        if !config_path.starts_with("/") {
+            let settings_dir = settings_path.split("/").collect::<Vec<&str>>()[0..2].join("/");
+            config_path = format!("{settings_dir}/{config_path}");
+        }
+
+        let config_file = fs::read_to_string(&config_path).unwrap();
         let config = serde_json::from_str(&config_file).unwrap();
 
         Reader { config, settings }
