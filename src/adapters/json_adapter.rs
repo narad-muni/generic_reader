@@ -1,4 +1,4 @@
-use std::{fs::File, io::BufReader};
+use std::{error::Error, fs::File, io::BufReader};
 
 use serde_json::{Map, Value};
 
@@ -14,16 +14,16 @@ impl Readable for JsonAdapter {
         _config: &crate::Config,
         from: Option<usize>,
         to: Option<usize>,
-    ) -> (Vec<String>, Vec<Vec<Value>>) {
+    ) -> Result<(Vec<String>, Vec<Vec<Value>>), Box<dyn Error>> {
         // Create file reader
-        let file = File::open(file_path).unwrap();
+        let file = File::open(file_path)?;
         let buf_reader = BufReader::new(file);
 
         // Create key value pair from json data
-        let data: Vec<Map<String, Value>> = serde_json::from_reader(buf_reader).unwrap();
+        let data: Vec<Map<String, Value>> = serde_json::from_reader(buf_reader)?;
 
         // Get first object to extract columns
-        let first = data.get(0).unwrap();
+        let first = data.get(0).ok_or("Empty data")?;
         let columns: Vec<String> = first.keys().map(|i| i.clone().to_string()).collect();
 
         // Set from and to
@@ -38,6 +38,6 @@ impl Readable for JsonAdapter {
             .map(|i| i.values().into_iter().map(|j| j.clone()).collect())
             .collect();
 
-        (columns, data)
+        Ok((columns, data))
     }
 }

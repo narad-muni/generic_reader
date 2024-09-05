@@ -6,9 +6,10 @@ fn main() {
         "/home/appadmin/Work/generic_reader/config.json".to_string(),
         "native.bin".to_string(),
         recorder::Type::Native,
-    );
+    )
+    .unwrap();
 
-    let (columns, data) = reader.read(None, None);
+    let (columns, data) = reader.read(None, None).unwrap();
 
     println!("Columns: \n\t{:?}", columns);
 

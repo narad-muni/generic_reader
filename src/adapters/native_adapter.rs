@@ -1,4 +1,5 @@
 use std::{
+    error::Error,
     fs::File,
     io::{BufReader, Read, Seek, SeekFrom},
 };
@@ -10,20 +11,20 @@ use crate::{DType, Readable};
 #[derive(Debug)]
 pub struct NativeAdapter {}
 
-fn cast_bytes(buf: &[u8], dtype: &DType) -> Value {
-    match dtype {
-        DType::Char => Value::String(String::from_utf8(buf.to_vec()).unwrap()),
+fn cast_bytes(buf: &[u8], dtype: &DType) -> Result<Value, Box<dyn Error>> {
+    Ok(match dtype {
+        DType::Char => Value::String(String::from_utf8(buf.to_vec())?),
         DType::Bool => Value::Bool(buf[0] != 0),
         DType::UInt => Value::Number(serde_json::Number::from(u32::from_be_bytes(
-            buf.try_into().unwrap(),
+            buf.try_into()?,
         ))),
         DType::SInt => Value::Number(serde_json::Number::from(i32::from_be_bytes(
-            buf.try_into().unwrap(),
+            buf.try_into()?,
         ))),
         DType::Float => Value::Number(
-            serde_json::Number::from_f64(f64::from_be_bytes(buf.try_into().unwrap())).unwrap(),
+            serde_json::Number::from_f64(f64::from_be_bytes(buf.try_into()?)).ok_or("NaN")?,
         ),
-    }
+    })
 }
 
 impl Readable for NativeAdapter {
@@ -33,9 +34,9 @@ impl Readable for NativeAdapter {
         config: &crate::Config,
         from: Option<usize>,
         to: Option<usize>,
-    ) -> (Vec<String>, Vec<Vec<Value>>) {
+    ) -> Result<(Vec<String>, Vec<Vec<Value>>), Box<dyn Error>> {
         // Create file reader and BufReader
-        let file = File::open(file_path).unwrap();
+        let file = File::open(file_path)?;
         let mut buf_reader = BufReader::new(file);
 
         // Get last col to calculate packet_size
@@ -44,7 +45,7 @@ impl Readable for NativeAdapter {
             .native_columns
             .iter()
             .max_by_key(|i| i.offset)
-            .unwrap();
+            .ok_or("Empty data")?;
 
         // Calculate packet_size
         let packet_size = last_col.offset + last_col.length;
@@ -66,9 +67,7 @@ impl Readable for NativeAdapter {
         // Seek till n packets, where n = form
         // Which is calculated by (from * packet_size)
         // Seek takes n bytes
-        buf_reader
-            .seek(SeekFrom::Start((from * packet_size) as u64))
-            .unwrap();
+        buf_reader.seek(SeekFrom::Start((from * packet_size) as u64))?;
 
         let mut data = vec![];
         let mut pos = 0;
@@ -93,7 +92,7 @@ impl Readable for NativeAdapter {
                 let buf = &buf[col.offset..(col.offset + col.length)];
 
                 // Convert byte array to required type
-                let val = cast_bytes(buf, &col.dtype);
+                let val = cast_bytes(buf, &col.dtype)?;
 
                 arr.push(val);
             }
@@ -103,6 +102,6 @@ impl Readable for NativeAdapter {
             pos += 1;
         }
 
-        (columns.collect(), data)
+        Ok((columns.collect(), data))
     }
 }

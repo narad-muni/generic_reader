@@ -1,4 +1,4 @@
-use std::{fs::File, io::BufReader};
+use std::{error::Error, fs::File, io::BufReader};
 
 use csv::StringRecord;
 use serde_json::Value;
@@ -15,9 +15,9 @@ impl Readable for CsvAdapter {
         config: &crate::Config,
         from: Option<usize>,
         to: Option<usize>,
-    ) -> (Vec<String>, Vec<Vec<Value>>) {
+    ) -> Result<(Vec<String>, Vec<Vec<Value>>), Box<dyn Error>> {
         // Create file reader
-        let file = File::open(file_path).unwrap();
+        let file = File::open(file_path)?;
         let buf_reader = BufReader::new(file);
 
         // Create csv reader
@@ -33,10 +33,9 @@ impl Readable for CsvAdapter {
             config.default_columns.clone()
         } else {
             reader
-                .byte_headers()
-                .unwrap()
+                .byte_headers()?
                 .iter()
-                .map(|i| String::from_utf8(i.to_vec()).unwrap())
+                .map(|i| String::from_utf8(i.to_vec()).expect("Invalid string"))
                 .collect()
         };
 
@@ -60,6 +59,6 @@ impl Readable for CsvAdapter {
             }
         }
 
-        (columns, data)
+        Ok((columns, data))
     }
 }

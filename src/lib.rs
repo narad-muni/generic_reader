@@ -1,4 +1,4 @@
-use std::{fmt::Debug, fs, path::Path};
+use std::{error::Error, fmt::Debug, fs};
 
 use adapters::{
     csv_adapter::CsvAdapter, json_lines_adapter::JsonLineAdapter, native_adapter::NativeAdapter,
@@ -86,16 +86,16 @@ impl Reader {
         config_path: String,
         file_path: String,
         _type: Type,
-    ) -> Reader {
+    ) -> Result<Reader, Box<dyn Error>> {
         // Load config to struct
-        let config_file = fs::read_to_string(&config_path).unwrap();
-        let config = serde_json::from_str(&config_file).unwrap();
+        let config_file = fs::read_to_string(&config_path)?;
+        let config = serde_json::from_str(&config_file)?;
 
-        Reader {
+        Ok(Reader {
             config,
             file_path,
             _type,
-        }
+        })
     }
 
     pub fn new_with_config(config: Config, file_path: String, _type: Type) -> Reader {
@@ -110,7 +110,11 @@ impl Reader {
         self.config.all_columns = all_columns;
     }
 
-    pub fn read(&self, from: Option<usize>, to: Option<usize>) -> (Vec<String>, Vec<Vec<Value>>) {
+    pub fn read(
+        &self,
+        from: Option<usize>,
+        to: Option<usize>,
+    ) -> Result<(Vec<String>, Vec<Vec<Value>>), Box<dyn Error>> {
         // Get adapter from mapping
         let adapter = get_adapter(&self._type);
 
@@ -130,5 +134,5 @@ pub trait Readable: Send + Sync + Debug {
         config: &Config,
         from: Option<usize>,
         to: Option<usize>,
-    ) -> (Vec<String>, Vec<Vec<Value>>);
+    ) -> Result<(Vec<String>, Vec<Vec<Value>>), Box<dyn Error>>;
 }
