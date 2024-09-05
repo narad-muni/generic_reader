@@ -91,8 +91,9 @@ pub struct Settings {
 impl Reader {
     pub fn new(settings_path: String) -> Reader {
         let settings_file = fs::read_to_string(&settings_path).unwrap();
-        let settings: Settings = serde_json::from_str(&settings_file).unwrap();
+        let mut settings: Settings = serde_json::from_str(&settings_file).unwrap();
 
+        let mut file_path = settings.file_path.clone();
         let mut config_path = settings.config_path.clone();
         // make config path absolute from settings path
         if !config_path.starts_with("/") {
@@ -100,6 +101,15 @@ impl Reader {
             let settings_dir = arr[0..arr.len()-1].join("/");
             config_path = format!("{settings_dir}/{config_path}");
         }
+
+        if !file_path.starts_with("/") {
+            let arr = settings_path.split("/").collect::<Vec<&str>>();
+            let settings_dir = arr[0..arr.len()-1].join("/");
+            file_path = format!("{settings_dir}/{file_path}");
+        }
+
+        settings.config_path = config_path.clone();
+        settings.file_path = file_path;
 
         let config_file = fs::read_to_string(&config_path).unwrap();
         let config = serde_json::from_str(&config_file).unwrap();
