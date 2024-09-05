@@ -48,10 +48,7 @@ impl Readable for JsonArrayAdapter {
         };
 
         // Collect data from slice
-        let data = values[from..to]
-            .into_iter()
-            .map(|i| i.clone())
-            .collect();
+        let data = values[from..to].into_iter().map(|i| i.clone()).collect();
 
         (columns, data)
     }

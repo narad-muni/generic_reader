@@ -1,4 +1,4 @@
-use std::{fmt::Debug, fs};
+use std::{fmt::Debug, fs, path::Path};
 
 use adapters::{
     csv_adapter::CsvAdapter, json_lines_adapter::JsonLineAdapter, native_adapter::NativeAdapter,
@@ -12,7 +12,8 @@ use crate::adapters::{json_adapter::JsonAdapter, json_array_adapter::JsonArrayAd
 
 pub struct Reader {
     pub config: Config,
-    pub settings: Settings,
+    pub file_path: String,
+    pub _type: Type,
 }
 
 /// Register adapter mappings here
@@ -80,41 +81,29 @@ pub struct Config {
     pub default_columns: Vec<String>,
 }
 
-#[derive(Debug, Deserialize)]
-pub struct Settings {
-    file_path: String,
-    #[serde(rename = "type")]
-    _type: Type,
-    config_path: String,
-}
-
 impl Reader {
-    pub fn new(settings_path: String) -> Reader {
-        let settings_file = fs::read_to_string(&settings_path).unwrap();
-        let mut settings: Settings = serde_json::from_str(&settings_file).unwrap();
-
-        let mut file_path = settings.file_path.clone();
-        let mut config_path = settings.config_path.clone();
-        // make config path absolute from settings path
-        if !config_path.starts_with("/") {
-            let arr = settings_path.split("/").collect::<Vec<&str>>();
-            let settings_dir = arr[0..arr.len()-1].join("/");
-            config_path = format!("{settings_dir}/{config_path}");
-        }
-
-        if !file_path.starts_with("/") {
-            let arr = settings_path.split("/").collect::<Vec<&str>>();
-            let settings_dir = arr[0..arr.len()-1].join("/");
-            file_path = format!("{settings_dir}/{file_path}");
-        }
-
-        settings.config_path = config_path.clone();
-        settings.file_path = file_path;
-
+    pub fn new(
+        config_path: String,
+        file_path: String,
+        _type: Type,
+    ) -> Reader {
+        // Load config to struct
         let config_file = fs::read_to_string(&config_path).unwrap();
         let config = serde_json::from_str(&config_file).unwrap();
 
-        Reader { config, settings }
+        Reader {
+            config,
+            file_path,
+            _type,
+        }
+    }
+
+    pub fn new_with_config(config: Config, file_path: String, _type: Type) -> Reader {
+        Reader {
+            config,
+            file_path,
+            _type,
+        }
     }
 
     pub fn all_columns(&mut self, all_columns: bool) {
@@ -123,9 +112,9 @@ impl Reader {
 
     pub fn read(&self, from: Option<usize>, to: Option<usize>) -> (Vec<String>, Vec<Vec<Value>>) {
         // Get adapter from mapping
-        let adapter = get_adapter(&self.settings._type);
+        let adapter = get_adapter(&self._type);
 
-        adapter.read(&self.settings.file_path, &self.config, from, to)
+        adapter.read(&self.file_path, &self.config, from, to)
     }
 }
 

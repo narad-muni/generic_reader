@@ -2,9 +2,13 @@ use recorder::Reader;
 
 fn main() {
     // Assign reader adapters here
-    let reader = Reader::new("/home/appadmin/Work/generic_reader/settings.json".to_string());
+    let reader = Reader::new(
+        "/home/appadmin/Work/generic_reader/config.json".to_string(),
+        "native.bin".to_string(),
+        recorder::Type::Native,
+    );
 
-    let (columns, data) = reader.read(Some(0), Some(5));
+    let (columns, data) = reader.read(None, None);
 
     println!("Columns: \n\t{:?}", columns);
 
