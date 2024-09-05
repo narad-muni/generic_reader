@@ -19,8 +19,8 @@ fn main() {
 
     println!("Columns: \n\t{:?}", columns);
 
-    println!("Data: ");
-    for i in data {
-        println!("\t{i:?}");
-    }
+    // println!("Data: ");
+    // for i in data {
+    //     println!("\t{i:?}");
+    // }
 }

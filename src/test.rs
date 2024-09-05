@@ -23,14 +23,14 @@ fn main() {
 
     let start = Instant::now();
 
-    for _ in 0..10000 {
+    for _ in 0..1000000 {
         native_writer.write_all(&id.to_be_bytes()).unwrap();
         native_writer.write_all(name.as_bytes()).unwrap();
         native_writer.write_all(&bool_to_byte(active)).unwrap();
         native_writer.write_all(&points.to_be_bytes()).unwrap();
     }
 
-    println!("{:?} per iter", start.elapsed() / 10000);
+    println!("{:?} per iter", start.elapsed() / 1000000);
 
     let id: i32 = 2;
     let name: &str = "Ramesh";
