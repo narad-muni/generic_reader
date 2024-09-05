@@ -13,14 +13,14 @@ fn main() {
 
     let start = Instant::now();
 
-    let (columns, data) = reader.read(None, None).unwrap();
+    let (columns, data) = reader.read(Some(3), Some(6)).unwrap();
 
     println!("{:?} for {:?} values\n {:?} per iter", start.elapsed(), data.len(), start.elapsed()/data.len() as u32);
 
     println!("Columns: \n\t{:?}", columns);
 
-    // println!("Data: ");
-    // for i in data {
-    //     println!("\t{i:?}");
-    // }
+    println!("Data: ");
+    for i in data {
+        println!("\t{i:?}");
+    }
 }

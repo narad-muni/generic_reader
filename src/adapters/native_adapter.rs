@@ -75,7 +75,7 @@ impl Readable for NativeAdapter {
         // Read into buf for packet size
         while let Ok(_) = buf_reader.read_exact(&mut buf[0..packet_size]) {
             // Break if pos is GE than to
-            if pos >= to {
+            if pos >= (to-from) {
                 break;
             }
 
