@@ -20,7 +20,7 @@ impl Readable for JsonArrayAdapter {
         let buf_reader = BufReader::new(file);
 
         // Read data using buffer reader
-        let values: Vec<Value> = serde_json::from_reader(buf_reader).unwrap();
+        let values: Vec<Vec<Value>> = serde_json::from_reader(buf_reader).unwrap();
 
         // Set from and to
         // min ensures it is within bounds
@@ -42,8 +42,6 @@ impl Readable for JsonArrayAdapter {
             values
                 .get(0)
                 .unwrap()
-                .as_array()
-                .unwrap()
                 .iter()
                 .map(|i| i.as_str().unwrap().to_string())
                 .collect()
@@ -52,7 +50,7 @@ impl Readable for JsonArrayAdapter {
         // Collect data from slice
         let data = values[from..to]
             .into_iter()
-            .map(|i| i.as_array().unwrap().clone())
+            .map(|i| i.clone())
             .collect();
 
         (columns, data)
