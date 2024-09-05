@@ -4,7 +4,7 @@ fn main() {
     // Assign reader adapters here
     let reader = Reader::new(
         "/home/appadmin/Work/generic_reader/config.json".to_string(),
-        "native.bin".to_string(),
+        "native2.bin".to_string(),
         recorder::Type::Native,
     )
     .unwrap();
