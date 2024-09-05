@@ -96,7 +96,8 @@ impl Reader {
         let mut config_path = settings.config_path.clone();
         // make config path absolute from settings path
         if !config_path.starts_with("/") {
-            let settings_dir = settings_path.split("/").collect::<Vec<&str>>()[0..2].join("/");
+            let arr = settings_path.split("/").collect::<Vec<&str>>();
+            let settings_dir = arr[0..arr.len()-1].join("/");
             config_path = format!("{settings_dir}/{config_path}");
         }
 
