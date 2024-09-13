@@ -194,8 +194,10 @@ impl Reader {
             });
         }else if _type == Type::MultiNative {
             config.native.packet_info.column_details.values().for_each(|c| {
-                c.columns.iter().for_each(|c| { 
-                    columns.insert(c.name.to_string(), Value::Bool(c.default));
+                c.columns.iter().for_each(|c| {
+                    if columns.get(&c.name).is_none() || columns.get(&c.name).unwrap() == false {
+                        columns.insert(c.name.to_string(), Value::Bool(c.default));
+                    }
                 });
             })
         }

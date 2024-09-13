@@ -8,7 +8,7 @@
         "d"
     ],
     "selected_columns": [
-        "id"
+        "c"
     ],
     "native": {
         "packet_header": {
@@ -38,7 +38,8 @@
             "packet_identifier": {
                 "dtype": "short",
                 "offset": 18,
-                "length": 2
+                "length": 2,
+                "default": true
             },
             "packet_size": {
                 "dtype": "short",
