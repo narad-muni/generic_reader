@@ -28,6 +28,8 @@ pub struct BufferValue {
     dtype: DType,
     offset: Option<usize>,
     length: usize,
+    #[serde(default)]
+    default: bool,
 }
 
 #[derive(Debug, Default, Deserialize)]
@@ -77,7 +79,7 @@ fn get_adapter(_type: &Type) -> Box<dyn Readable> {
     }
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, PartialEq)]
 #[serde(rename_all = "snake_case")]
 pub enum Type {
     Json,
@@ -102,14 +104,6 @@ pub enum DType {
     None,
 }
 
-#[derive(Debug, Deserialize, Clone)]
-pub struct NativeColumn {
-    name: String,
-    dtype: DType,
-    offset: usize,
-    length: usize,
-}
-
 #[derive(Debug, Deserialize)]
 pub struct Config {
     /// flag to select all columns
@@ -124,7 +118,7 @@ pub struct Config {
     /// Third is (offset, length) if buffer which contains data
     /// We need to caste the buffer to defined type
     #[serde(default)]
-    pub native_columns: Vec<NativeColumn>,
+    pub native_columns: Vec<BufferValue>,
 
     /// Used for native files.
     /// can be configured to read any number of columns
@@ -181,6 +175,33 @@ impl Reader {
         let len = len.unwrap_or(10);
 
         adapter.read(&self.file_path, &self.config, from, len)
+    }
+
+    pub fn get_columns(&self, _type: Type) -> Map<String, Value> {
+        let mut columns = Map::new();
+        let config = &self.config;
+
+        // For csv like structures
+        if (_type == Type::Csv || _type == Type::JsonArray) && config.use_default_columns {
+            config.default_columns.iter().for_each(|c| {
+                columns.insert(c.to_string(), Value::Bool(
+                    // If column is in selected columns
+                    config.selected_columns.contains(&c.to_string())
+                ));
+            });
+        }else if _type == Type::Native {
+            config.native_columns.iter().for_each(|c| {
+                columns.insert(c.name.to_string(), Value::Bool(c.default));
+            });
+        }else if _type == Type::MultiNative {
+            config.native.packet_info.column_details.values().for_each(|c| {
+                c.columns.iter().for_each(|c| { 
+                    columns.insert(c.name.to_string(), Value::Bool(c.default));
+                });
+            })
+        }
+
+        columns
     }
 }
 

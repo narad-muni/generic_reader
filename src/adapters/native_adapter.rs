@@ -34,7 +34,7 @@ impl Readable for NativeAdapter {
             .ok_or("Empty data")?;
 
         // Calculate packet_size
-        let packet_size = last_col.offset + last_col.length;
+        let packet_size = last_col.offset.unwrap_or(0) + last_col.length;
         let mut buf = [0; 1024];
 
         // Get column details from config
@@ -66,7 +66,7 @@ impl Readable for NativeAdapter {
             // Cast for each column
             for col in &native_columns {
                 // Get slice from buf
-                let buf = &buf[col.offset..(col.offset + col.length)];
+                let buf = &buf[col.offset.unwrap_or(0)..(col.offset.unwrap_or(0) + col.length)];
 
                 // Convert byte array to required type
                 let val = cast_bytes(buf, &col.dtype)?;
