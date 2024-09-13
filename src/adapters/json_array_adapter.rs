@@ -1,6 +1,6 @@
 use std::{error::Error, fs::File, io::BufReader};
 
-use serde_json::Value;
+use serde_json::{Map, Value};
 
 use crate::Readable;
 
@@ -13,8 +13,8 @@ impl Readable for JsonArrayAdapter {
         file_path: &String,
         config: &crate::Config,
         from: Option<usize>,
-        to: Option<usize>,
-    ) -> Result<(Vec<String>, Vec<Vec<Value>>), Box<dyn Error>> {
+        len: usize,
+    ) -> Result<Vec<Map<String, Value>>, Box<dyn Error>> {
         // Create file reader
         let file = File::open(file_path)?;
         let buf_reader = BufReader::new(file);
@@ -26,7 +26,7 @@ impl Readable for JsonArrayAdapter {
         // min ensures it is within bounds
         let length = values.len();
         let mut from = from.unwrap_or(0).min(length);
-        let mut to = to.unwrap_or(usize::MAX).min(length);
+        let mut to = (from + len).min(length);
 
         // Get first object
         let columns: Vec<String> = if config.use_default_columns {
@@ -47,9 +47,19 @@ impl Readable for JsonArrayAdapter {
                 .collect()
         };
 
-        // Collect data from slice
-        let data = values[from..to].into_iter().map(|i| i.clone()).collect();
+        let mut data = vec![];
 
-        Ok((columns, data))
+        // Collect data from slice
+        values[from..to].into_iter().for_each(|val| {
+            let mut hashmap = Map::new();
+
+            for i in 0..val.len() {
+                hashmap.insert(columns[i].clone(), Value::from(val[i].clone()));
+            }
+
+            data.push(hashmap);
+        });
+
+        Ok(data)
     }
 }

@@ -1,7 +1,7 @@
 use std::{error::Error, fs::File, io::BufReader};
 
 use csv::StringRecord;
-use serde_json::Value;
+use serde_json::{Map, Value};
 
 use crate::Readable;
 
@@ -14,8 +14,8 @@ impl Readable for CsvAdapter {
         file_path: &String,
         config: &crate::Config,
         from: Option<usize>,
-        to: Option<usize>,
-    ) -> Result<(Vec<String>, Vec<Vec<Value>>), Box<dyn Error>> {
+        len: usize,
+    ) -> Result<Vec<Map<String, Value>>, Box<dyn Error>> {
         // Create file reader
         let file = File::open(file_path)?;
         let buf_reader = BufReader::new(file);
@@ -25,40 +25,33 @@ impl Readable for CsvAdapter {
 
         // Set columns depending on config
         // Either from config file defaults or from csv file
-        let columns = if config.use_default_columns {
+        if config.use_default_columns {
             // Set headers to default
             // This marks first entry as data rather than header
             reader.set_headers(StringRecord::from(config.default_columns.clone()));
+        }
 
-            config.default_columns.clone()
-        } else {
-            reader
-                .byte_headers()?
-                .iter()
-                .map(|i| String::from_utf8(i.to_vec()).expect("Invalid string"))
-                .collect()
-        };
+        let columns = reader.headers()?.clone();
 
         // Set from and to
         // min ensures it is within bounds
         let from = from.unwrap_or(0);
-        let to = to.unwrap_or(usize::MAX);
 
         let mut data = vec![];
 
         // Iter through slice of data and collect values
-        for result in reader.byte_records().skip(from).take(to - from) {
-            if let Ok(record) = result {
-                // Convert record to vector of values
-                data.push(
-                    record
-                        .iter()
-                        .map(|i| Value::String(String::from_utf8_lossy(i).to_string()))
-                        .collect(),
-                );
+        for record in reader.records().skip(from).take(len) {
+            let record = record?;
+
+            let mut hashmap = Map::new();
+
+            for (key, value) in columns.iter().zip(record.iter()) {
+                hashmap.insert(key.to_string(), Value::from(value));
             }
+
+            data.push(hashmap);
         }
 
-        Ok((columns, data))
+        Ok(data)
     }
 }

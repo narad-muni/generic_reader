@@ -1,10 +1,11 @@
-use std::{error::Error, fmt::Debug, fs};
+use std::{collections::HashMap, error::Error, fmt::Debug, fs};
 
 use adapters::{
-    csv_adapter::CsvAdapter, json_lines_adapter::JsonLineAdapter, native_adapter::NativeAdapter,
+    csv_adapter::CsvAdapter, json_lines_adapter::JsonLineAdapter,
+    multi_native_adapter::MultiNative, native_adapter::NativeAdapter,
 };
 use serde::Deserialize;
-use serde_json::Value;
+use serde_json::{Map, Value};
 
 mod adapters;
 
@@ -16,6 +17,54 @@ pub struct Reader {
     pub _type: Type,
 }
 
+/// Used to define a value in buffer block
+/// e.g. in buffer of 512 bytes
+/// username starts at 3rd byte, has length of 7, is of type char array
+#[derive(Debug, Default, Deserialize, Clone)]
+pub struct BufferValue {
+    #[serde(default)]
+    name: String,
+    #[serde(default)]
+    dtype: DType,
+    offset: Option<usize>,
+    length: usize,
+}
+
+#[derive(Debug, Default, Deserialize)]
+pub struct PacketHeader {
+    packet_size: BufferValue,
+    timestamp: BufferValue,
+}
+
+#[derive(Debug, Default, Deserialize)]
+pub struct PacketColumns {
+    expected_size: u32,
+    columns: Vec<BufferValue>,
+}
+
+#[derive(Debug, Default, Deserialize,PartialEq)]
+#[serde(rename_all = "snake_case")]
+pub enum CompressionType {
+    #[default]
+    Lzo,
+}
+
+#[derive(Debug, Default, Deserialize)]
+pub struct PacketInfo {
+    no_of_packets: BufferValue,
+    compressed_packet_size: BufferValue,
+    compresseion_type: CompressionType,
+    packet_size: BufferValue,
+    packet_identifier: BufferValue,
+    column_details: HashMap<u64, PacketColumns>,
+}
+
+#[derive(Debug, Default, Deserialize)]
+pub struct NativeSettings {
+    packet_header: PacketHeader,
+    packet_info: PacketInfo,
+}
+
 /// Register adapter mappings here
 fn get_adapter(_type: &Type) -> Box<dyn Readable> {
     match _type {
@@ -24,6 +73,7 @@ fn get_adapter(_type: &Type) -> Box<dyn Readable> {
         Type::JsonLines => Box::new(JsonLineAdapter {}),
         Type::Native => Box::new(NativeAdapter {}),
         Type::Csv => Box::new(CsvAdapter {}),
+        Type::MultiNative => Box::new(MultiNative {}),
     }
 }
 
@@ -35,16 +85,21 @@ pub enum Type {
     JsonLines,
     Csv,
     Native,
+    MultiNative,
 }
 
-#[derive(Debug, Deserialize, Clone)]
+#[derive(Debug, Default, Deserialize, Clone)]
 #[serde(rename_all = "snake_case")]
 pub enum DType {
     Char,
     UInt,
+    Short,
     SInt,
     Float,
     Bool,
+    Byte,
+    #[default]
+    None,
 }
 
 #[derive(Debug, Deserialize, Clone)]
@@ -70,6 +125,11 @@ pub struct Config {
     /// We need to caste the buffer to defined type
     #[serde(default)]
     pub native_columns: Vec<NativeColumn>,
+
+    /// Used for native files.
+    /// can be configured to read any number of columns
+    #[serde(default)]
+    pub native: NativeSettings,
 
     /// If true, it will use default columns
     #[serde(default)]
@@ -113,12 +173,14 @@ impl Reader {
     pub fn read(
         &self,
         from: Option<usize>,
-        to: Option<usize>,
-    ) -> Result<(Vec<String>, Vec<Vec<Value>>), Box<dyn Error>> {
+        len: Option<usize>,
+    ) -> Result<Vec<Map<String, Value>>, Box<dyn Error>> {
         // Get adapter from mapping
         let adapter = get_adapter(&self._type);
 
-        adapter.read(&self.file_path, &self.config, from, to)
+        let len = len.unwrap_or(10);
+
+        adapter.read(&self.file_path, &self.config, from, len)
     }
 }
 
@@ -133,6 +195,6 @@ pub trait Readable: Send + Sync + Debug {
         file_path: &String,
         config: &Config,
         from: Option<usize>,
-        to: Option<usize>,
-    ) -> Result<(Vec<String>, Vec<Vec<Value>>), Box<dyn Error>>;
+        len: usize,
+    ) -> Result<Vec<Map<String, Value>>, Box<dyn Error>>;
 }

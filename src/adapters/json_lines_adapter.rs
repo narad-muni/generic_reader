@@ -17,8 +17,8 @@ impl Readable for JsonLineAdapter {
         file_path: &String,
         _config: &crate::Config,
         from: Option<usize>,
-        to: Option<usize>,
-    ) -> Result<(Vec<String>, Vec<Vec<Value>>), Box<dyn Error>> {
+        len: usize,
+    ) -> Result<Vec<Map<String, Value>>, Box<dyn Error>> {
         // Create file reader with BufReader
         let file = File::open(&file_path)?;
         let mut buf_reader = BufReader::new(file);
@@ -30,15 +30,8 @@ impl Readable for JsonLineAdapter {
         // Reset reader to 0 after reading first line
         buf_reader.seek(SeekFrom::Start(0))?;
 
-        // Get first object to extract headers
-        let columns = serde_json::from_str::<Map<String, Value>>(&buf)?
-            .keys()
-            .map(|i| i.clone())
-            .collect();
-
         // Set from and to
         let from = from.unwrap_or(0);
-        let to = to.unwrap_or(usize::MAX);
 
         // Create iter of lines
         let lines = buf_reader.lines();
@@ -47,18 +40,15 @@ impl Readable for JsonLineAdapter {
         // Skip from lines and take (to - from) lines
         let mut data = vec![];
 
-        for line in lines.skip(from).take(to - from) {
+        for line in lines.skip(from).take(len) {
             if let Ok(line) = line {
                 // Decode each line as json
                 let json_obj = serde_json::from_str::<Map<String, Value>>(&line)?;
 
-                // Collect values from json object
-                let x = json_obj.values().map(|i| i.clone()).collect();
-
-                data.push(x);
+                data.push(json_obj);
             }
         }
 
-        Ok((columns, data))
+        Ok(data)
     }
 }

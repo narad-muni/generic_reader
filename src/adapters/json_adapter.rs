@@ -13,8 +13,8 @@ impl Readable for JsonAdapter {
         file_path: &String,
         _config: &crate::Config,
         from: Option<usize>,
-        to: Option<usize>,
-    ) -> Result<(Vec<String>, Vec<Vec<Value>>), Box<dyn Error>> {
+        len: usize,
+    ) -> Result<Vec<Map<String, Value>>, Box<dyn Error>> {
         // Create file reader
         let file = File::open(file_path)?;
         let buf_reader = BufReader::new(file);
@@ -22,22 +22,17 @@ impl Readable for JsonAdapter {
         // Create key value pair from json data
         let data: Vec<Map<String, Value>> = serde_json::from_reader(buf_reader)?;
 
-        // Get first object to extract columns
-        let first = data.get(0).ok_or("Empty data")?;
-        let columns: Vec<String> = first.keys().map(|i| i.clone().to_string()).collect();
-
         // Set from and to
         // min ensures it is within bounds
         let length = data.len();
         let from = from.unwrap_or(0).min(length);
-        let to = to.unwrap_or(usize::MAX).min(length);
+        let to = (from + len).min(length);
 
-        // Iter through slice of data and collect values
         let data = data[from..to]
             .iter()
-            .map(|i| i.values().into_iter().map(|j| j.clone()).collect())
-            .collect();
+            .map(|i| i.clone())
+            .collect::<Vec<_>>();
 
-        Ok((columns, data))
+        Ok(data)
     }
 }

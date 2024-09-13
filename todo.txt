@@ -4,3 +4,21 @@ regular json array of objects
 csv - regular csv
 native - binary file with json file indicating it's structure
 add flatten support to json
+
+
+{
+	"PacketHeader":	{
+		PacketSize: { 0: , 2: , short: }, //31000
+		PacketTime: { offset: , length: , int64: } //5
+	},
+	"PacketInfo" : {
+		"CompressionIdentifier": { offset:  2, length:  1, short, "type": "LZO/zlib",
+			"CompressedSize": { offset: , length: , datatype: }
+		},
+		PacketSize: { 0: , 2: , short: , twiddle}, //31000
+		"PacketIdentifier": {4,2,"short", twiddle},
+		"PacketDetails": {
+			"7305": {ExpectedSize:256, columns:[{name: "", offset, length, datatype, twiddle, default: }, {name: "", offset, length, datatype}]}
+		}
+	}
+}

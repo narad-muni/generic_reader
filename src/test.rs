@@ -1,44 +1,12 @@
-use std::{fs::File, io::Write, time::Instant};
-
-fn bool_to_byte(b: bool) -> [u8; 1] {
-    if b {
-        [1]
-    } else {
-        [0]
-    }
-}
-
 fn main() {
-    let mut native_writer = File::create("native2.bin").unwrap();
+    let byte_array: Vec<u8> = vec![26, 2, 89, 90, 42, 42, 49, 50, 51, 0, 64, 0, 5, 84, 17, 135, 90, 0, 0, 28, 34, 64, 40, 2, 2, 235, 28, 17, 0, 224, 76, 2, 93, 111, 10, 48, 32, 128, 0, 11, 0, 250, 0, 8, 0, 0, 189, 60, 0, 1, 0, 0, 57, 188, 64, 121, 45, 0, 186, 232, 115, 128, 15, 15, 253, 107, 64, 101, 73, 126, 101, 194, 92, 10, 15, 0, 13, 165, 107, 0, 15, 205, 50, 0, 5, 78, 82, 93, 49, 126, 29, 201, 156, 8, 26, 111, 58, 0, 27, 129, 99, 0, 19, 70, 241, 93, 77, 126, 159, 216, 156, 12, 21, 75, 159, 0, 22, 251, 147, 0, 16, 121, 253, 0, 0, 188, 204, 126, 15, 80, 159, 30, 81, 24, 0, 12, 3, 163, 197, 0, 17, 230, 98, 64, 101, 197, 126, 8, 207, 158, 40, 162, 0, 68, 4, 41, 22, 42, 0, 36, 121, 83, 64, 101, 181, 126, 5, 135, 130, 111, 15, 190, 65, 1, 36, 3, 86, 63, 0, 14, 178, 63, 64, 101, 143, 126, 3, 227, 93, 75, 0, 69, 40, 1, 190, 14, 70, 0, 15, 9, 132, 9, 17, 0, 0];
 
-    let id: i32 = 1;
-    let name: &str = "Saumil";
-    let active: bool = true;
-    let points: f64 = 2.5;
+    // Print each byte as a two-digit hex value
+    let hex_array: Vec<String> = byte_array
+        .iter()
+        .map(|byte| format!("0x{:02x}", byte)) // Convert each byte to hex
+        .collect();
 
-    let id2: i32 = 2;
-    let name2: &str = "Ramesh";
-    let active2: bool = false;
-    let points2: f64 = 1.6;
-
-    // println!("{:?}", &id.to_be_bytes());
-    // println!("{:?}", name.as_bytes());
-    // println!("{:?}", &bool_to_byte(active));
-    // println!("{:?}", &points.to_be_bytes());
-
-    let start = Instant::now();
-
-    for _ in 0..500000 {
-        native_writer.write_all(&id.to_be_bytes()).unwrap();
-        native_writer.write_all(name.as_bytes()).unwrap();
-        native_writer.write_all(&bool_to_byte(active)).unwrap();
-        native_writer.write_all(&points.to_be_bytes()).unwrap();
-
-        native_writer.write_all(&id2.to_be_bytes()).unwrap();
-        native_writer.write_all(name2.as_bytes()).unwrap();
-        native_writer.write_all(&bool_to_byte(active2)).unwrap();
-        native_writer.write_all(&points2.to_be_bytes()).unwrap();
-    }
-
-    println!("{:?} per iter", start.elapsed() / 1000000);
+    // Join the hex strings with spaces for readability
+    println!("[{}]", hex_array.join(", "));
 }
