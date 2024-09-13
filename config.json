@@ -58,7 +58,7 @@
                         },
                         {
                             "name": "Reserved",
-                            "dtype": "char",
+                            "dtype": "none",
                             "length": 4
                         },
                         {
@@ -88,12 +88,12 @@
                         },
                         {
                             "name": "Reserved",
-                            "dtype": "char",
+                            "dtype": "none",
                             "length": 1
                         },
                         {
                             "name": "Reserved",
-                            "dtype": "char",
+                            "dtype": "none",
                             "length": 3
                         },
                         {
@@ -150,6 +150,41 @@
                             "name": "DayLoOI",
                             "dtype": "u_int",
                             "length": 4
+                        },
+                        {
+                            "name": "1_Token",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "1_MarketType",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "1_FillPrice",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "1_FillVolume",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "1_OpenInterest",
+                            "dtype": "u_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "1_DayHiOI",
+                            "dtype": "u_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "1_DayLoOI",
+                            "dtype": "u_int",
+                            "length": 4
                         }
                     ]
                 },
@@ -164,7 +199,7 @@
                         },
                         {
                             "name": "Reserved",
-                            "dtype": "char",
+                            "dtype": "none",
                             "length": 4
                         },
                         {
@@ -194,12 +229,12 @@
                         },
                         {
                             "name": "Reserved",
-                            "dtype": "char",
+                            "dtype": "none",
                             "length": 1
                         },
                         {
                             "name": "Reserved",
-                            "dtype": "char",
+                            "dtype": "none",
                             "length": 3
                         },
                         {
@@ -214,6 +249,11 @@
                         },
                         {
                             "name": "MessageLength",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "no_of_rec",
                             "dtype": "short",
                             "length": 2
                         },
@@ -245,7 +285,7 @@
                         {
                             "name": "NetChangeIndicator",
                             "dtype": "char",
-                            "length": 1
+                            "length": 2
                         },
                         {
                             "name": "NetPriceChangeFromClosingPrice",
@@ -374,6 +414,7 @@
                         },
                         {
                             "name": "TransactionCode",
+                            "default": true,
                             "dtype": "short",
                             "length": 2
                         },

@@ -27,17 +27,17 @@ impl Readable for MultiNative {
         let mut values = vec![];
         let mut pos = 0;
 
+        // Get all headers
+        let packet_header = &config.native.packet_header;
+        let packet_info = &config.native.packet_info;
+
+        let header_size = get_len_from_columns(vec![&packet_header.timestamp, &packet_header.packet_size]);
+
         // Loop for each buffer in file
         loop {
             // Init a buffer
             let mut buf: [u8; 1024] = [0; 1024];
             let mut offset = 0;
-
-            // Get all headers
-            let packet_header = &config.native.packet_header;
-            let packet_info = &config.native.packet_info;
-
-            let header_size = get_len_from_columns(vec![&packet_header.timestamp, &packet_header.packet_size]);
 
             // Check if header data is available in file or EOF
             if buf_reader.read_exact(&mut buf[0..header_size]).is_err() {
@@ -73,7 +73,7 @@ impl Readable for MultiNative {
             let mut base = 0;
 
             // For each packet inside udp packet
-            for _ in 0..no_of_packets.as_u64().unwrap() {
+            for _ in 0..no_of_packets.as_u64().unwrap_or(1) {
                 // load buffer from base
                 let mut offset = 0;
                 let mut buf = &buf[base..];
