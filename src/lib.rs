@@ -177,9 +177,8 @@ impl Reader {
         adapter.read(&self.file_path, &self.config, from, len)
     }
 
-    pub fn get_columns(&self, _type: Type) -> Map<String, Value> {
+    pub fn get_columns(config: Config, _type: Type) -> Map<String, Value> {
         let mut columns = Map::new();
-        let config = &self.config;
 
         // For csv like structures
         if (_type == Type::Csv || _type == Type::JsonArray) && config.use_default_columns {
