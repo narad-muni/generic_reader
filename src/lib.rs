@@ -90,7 +90,7 @@ pub enum Type {
     MultiNative,
 }
 
-#[derive(Debug, Default, Deserialize, Clone)]
+#[derive(Debug, Default, Deserialize, Clone, PartialEq)]
 #[serde(rename_all = "snake_case")]
 pub enum DType {
     Char,
@@ -190,11 +190,21 @@ impl Reader {
             });
         }else if _type == Type::Native {
             config.native_columns.iter().for_each(|c| {
+
+                if c.dtype == DType::None {
+                    return;
+                }
+
                 columns.insert(c.name.to_string(), Value::Bool(c.default));
             });
         }else if _type == Type::MultiNative {
             config.native.packet_info.column_details.values().for_each(|c| {
                 c.columns.iter().for_each(|c| {
+
+                    if c.dtype == DType::None {
+                        return;
+                    }
+
                     if columns.get(&c.name).is_none() || columns.get(&c.name).unwrap() == false {
                         columns.insert(c.name.to_string(), Value::Bool(c.default));
                     }
