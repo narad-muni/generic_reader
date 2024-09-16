@@ -34,7 +34,7 @@ impl Readable for MultiNative {
         let header_size = get_len_from_columns(vec![&packet_header.timestamp, &packet_header.packet_size]);
 
         // Loop for each buffer in file
-        loop {
+        'outer: loop {
             // Init a buffer
             let mut buf: [u8; 1024] = [0; 1024];
             let mut offset = 0;
@@ -57,13 +57,6 @@ impl Readable for MultiNative {
             buf_reader.read_exact(&mut buf[0..packet_size.as_u64().unwrap() as usize]).unwrap();
             let mut offset = 0;
 
-            // After reading buffer
-            // Skip packets before from
-            if pos < from {
-                pos += 1;
-                continue;    
-            }
-
             // get no of packets
             let no_of_packets = col_from_buf(&packet_info.no_of_packets, &buf, &mut offset)?;
             // println!("no_of_packets {}", no_of_packets);
@@ -74,6 +67,13 @@ impl Readable for MultiNative {
 
             // For each packet inside udp packet
             for _ in 0..no_of_packets.as_u64().unwrap_or(1) {
+                // After reading buffer
+                // Skip packets before from
+                if pos < from {
+                    pos += 1;
+                    continue;    
+                }
+                
                 // load buffer from base
                 let mut offset = 0;
                 let mut buf = &buf[base..];
@@ -136,13 +136,13 @@ impl Readable for MultiNative {
                 read_uncompressed(&column_details.columns, &buf, &mut offset, &mut hashmap);
 
                 values.push(hashmap);
-            }
 
-            pos += 1;
+                pos += 1;
 
-            if pos >= (from + len) {
-                // println!("END at {pos}");
-                break;
+                if pos >= (from + len) {
+                    // println!("END at {pos}");
+                    break 'outer;
+                }
             }
         }
 
