@@ -1,6 +1,6 @@
 {
     "all_columns": true,
-    "use_default_columns": true,
+    "use_default_columns": false,
     "default_columns": [
         "a",
         "b",

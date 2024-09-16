@@ -1,7 +1,5 @@
 use std::{
-    error::Error,
-    fs::File,
-    io::{BufReader, Read}, vec,
+    error::Error, fs::File, io::{BufReader, Read}, vec
 };
 
 use serde_json::{Map, Value};
@@ -20,6 +18,8 @@ impl Readable for MultiNative {
         from: Option<usize>,
         len: usize,
     ) -> Result<Vec<Map<String, Value>>, Box<dyn Error>> {
+        let from = from.unwrap_or(0);
+
         // Create file reader and BufReader
         let file = File::open(file_path)?;
         let mut buf_reader = BufReader::new(file);
@@ -41,7 +41,7 @@ impl Readable for MultiNative {
 
             // Check if header data is available in file or EOF
             if buf_reader.read_exact(&mut buf[0..header_size]).is_err() {
-                println!("EOF at {pos}");
+                // println!("EOF at {pos}");
                 break;
             }
 
@@ -49,8 +49,8 @@ impl Readable for MultiNative {
             let timestamp = col_from_buf(&packet_header.timestamp, &buf, &mut offset)?;
             let packet_size = col_from_buf(&packet_header.packet_size, &buf, &mut offset)?;
 
-            println!("timestamp {}", timestamp);
-            println!("packet size {}", packet_size);
+            // println!("timestamp {}", timestamp);
+            // println!("packet size {}", packet_size);
 
             // Read buffer
             buf = [0; 1024];
@@ -59,14 +59,14 @@ impl Readable for MultiNative {
 
             // After reading buffer
             // Skip packets before from
-            if pos < from.unwrap_or(usize::MIN) {
+            if pos < from {
                 pos += 1;
                 continue;    
             }
 
             // get no of packets
             let no_of_packets = col_from_buf(&packet_info.no_of_packets, &buf, &mut offset)?;
-            println!("no_of_packets {}", no_of_packets);
+            // println!("no_of_packets {}", no_of_packets);
 
             // Read buffer
             let buf = &buf[offset..];
@@ -82,7 +82,7 @@ impl Readable for MultiNative {
                 // Get compressed packet size
                 let compressed_packet_size = col_from_buf(&packet_info.compressed_packet_size, &buf, &mut offset).unwrap();
 
-                println!("compressed_packet_size {}", compressed_packet_size);
+                // println!("compressed_packet_size {}", compressed_packet_size);
 
                 // Check if packet is compressed
                 if compressed_packet_size.is_u64() && compressed_packet_size.as_u64().unwrap() > 0 {
@@ -104,8 +104,8 @@ impl Readable for MultiNative {
                 let packet_identifier = col_from_buf(&packet_info.packet_identifier, &buf, &mut offset).unwrap();
                 let packet_size = col_from_buf(&packet_info.packet_size, &buf, &mut offset).unwrap();
 
-                println!("packet_size {}", packet_size);
-                println!("packet_identifier {}", packet_identifier);
+                // println!("packet_size {}", packet_size);
+                // println!("packet_identifier {}", packet_identifier);
 
                 // Get column details or default
                 let column_details = packet_info.column_details.get(&packet_identifier.as_u64().unwrap()).unwrap_or(
@@ -113,7 +113,11 @@ impl Readable for MultiNative {
                 );
 
                 // Read values from packet buf
-                let hashmap = read_uncompressed(&column_details.columns, &buf, &mut offset);
+                let mut hashmap = Map::new();
+
+                hashmap.insert("timestamp".to_string(), timestamp.clone());
+
+                read_uncompressed(&column_details.columns, &buf, &mut offset, &mut hashmap);
 
                 values.push(hashmap);
 
@@ -132,8 +136,8 @@ impl Readable for MultiNative {
 
             pos += 1;
 
-            if pos >= len {
-                println!("END at {pos}");
+            if pos >= (from + len) {
+                // println!("END at {pos}");
                 break;
             }
         }
@@ -142,10 +146,9 @@ impl Readable for MultiNative {
     }
 }
 
-fn read_uncompressed(columns: &Vec<BufferValue>, buf: &[u8], total_offset: &mut usize) -> Map<String, Value> {
+fn read_uncompressed(columns: &Vec<BufferValue>, buf: &[u8], total_offset: &mut usize, hashmap: &mut Map<String, Value>){
     // Offset to track position in buffer
     let mut offset = 0;
-    let mut values = Map::new();
 
     for column in columns {
         // Auto increment offset
@@ -159,12 +162,10 @@ fn read_uncompressed(columns: &Vec<BufferValue>, buf: &[u8], total_offset: &mut 
         }
 
         // Push value
-        values.insert(column.name.clone(), val);
+        hashmap.insert(column.name.clone(), val);
     }
 
     // Increment total offset
     // Used for multiple packets in same buffer
     *total_offset += offset;
-
-    values
 }
