@@ -41,6 +41,8 @@ pub struct PacketHeader {
 #[derive(Debug, Default, Deserialize)]
 pub struct PacketColumns {
     expected_size: u32,
+    #[serde(default)]
+    skip_bytes: u32,
     columns: Vec<BufferValue>,
 }
 

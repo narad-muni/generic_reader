@@ -94,9 +94,14 @@ impl Readable for MultiNative {
                     };                    
 
                     buf = &decompress_buf;
+
+                    // Add compressed packet size to base
+                    base += compressed_packet_size.as_u64().unwrap() as usize;
                 }else{
                     buf = &buf[offset..];
                 }
+
+                base += offset;
 
                 offset = 0;
 
@@ -104,13 +109,24 @@ impl Readable for MultiNative {
                 let packet_identifier = col_from_buf(&packet_info.packet_identifier, &buf, &mut offset).unwrap();
                 let packet_size = col_from_buf(&packet_info.packet_size, &buf, &mut offset).unwrap();
 
+                // Set offset to 0 when starting to read form 0
+                offset = 0;
+
                 // println!("packet_size {}", packet_size);
                 // println!("packet_identifier {}", packet_identifier);
 
                 // Get column details or default
-                let column_details = packet_info.column_details.get(&packet_identifier.as_u64().unwrap()).unwrap_or(
-                    packet_info.column_details.get(&0).expect(format!("Unable to find columns for {}", packet_identifier).as_str()),
-                );
+                let column_details = packet_info.column_details.get(&packet_identifier.as_u64().unwrap()).unwrap_or_else(|| {
+                    packet_info.column_details.get(&0).expect(format!("Unable to find columns for {}", packet_identifier).as_str())
+                });
+
+                // Calculate base for next packet
+                // add packet size and skip bytes
+                // Only calculate this for non-compressed packets
+                // Because length changes after decompression
+                if !(compressed_packet_size.is_u64() && compressed_packet_size.as_u64().unwrap() > 0) {
+                    base += packet_size.as_u64().unwrap() as usize + column_details.skip_bytes as usize;
+                }
 
                 // Read values from packet buf
                 let mut hashmap = Map::new();
@@ -120,18 +136,6 @@ impl Readable for MultiNative {
                 read_uncompressed(&column_details.columns, &buf, &mut offset, &mut hashmap);
 
                 values.push(hashmap);
-
-                // Calculate base for next packet
-                if packet_size.is_i64() {
-                    // If packet size is given in buffer
-                    base += packet_size.as_i64().unwrap() as usize;
-                }else if column_details.expected_size > 0 {
-                    // If packet size is given in config
-                    base += column_details.expected_size as usize;
-                }else{
-                    // Else start next packet from current packet end
-                    base += offset;
-                }
             }
 
             pos += 1;

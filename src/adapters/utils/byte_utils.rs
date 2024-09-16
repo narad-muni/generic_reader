@@ -39,10 +39,26 @@ pub fn col_from_buf(
 
     // Calculation for padding
     if column.length % 2 == 0 && *offset % 2 == 1 {
-        println!("Adding offset at {} {}",column.name, offset);
+        // println!("Adding offset at {} {}",column.name, offset);
         *offset += 1;
     }
 
+    if column.offset.is_some() {
+        *offset = column.offset.unwrap();
+    }
+
+    let slice = &buf[*offset..(*offset + column.length)];
+
+    *offset += column.length;
+
+    cast_bytes(slice, &column.dtype)
+}
+
+pub fn col_from_buf_no_padding(
+    column: &BufferValue,
+    buf: &[u8],
+    offset: &mut usize
+) -> Result<Value, Box<dyn Error>> {
     if column.offset.is_some() {
         *offset = column.offset.unwrap();
     }
