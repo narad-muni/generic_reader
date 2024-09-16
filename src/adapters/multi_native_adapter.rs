@@ -109,7 +109,7 @@ impl Readable for MultiNative {
 
                 // Get column details or default
                 let column_details = packet_info.column_details.get(&packet_identifier.as_u64().unwrap()).unwrap_or(
-                    packet_info.column_details.get(&0).expect("Unable to find columns")
+                    packet_info.column_details.get(&0).expect(format!("Unable to find columns for {}", packet_identifier).as_str()),
                 );
 
                 // Read values from packet buf
