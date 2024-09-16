@@ -13,7 +13,7 @@ fn main() {
 
     let start = Instant::now();
 
-    let data = reader.read(Some(1), Some(6)).unwrap();
+    let data = reader.read(Some(48), Some(1)).unwrap();
 
     println!(
         "{:?} for {:?} values\n {:?} per iter",
@@ -28,6 +28,8 @@ fn main() {
 
     println!("Data: ");
     for i in data {
-        println!("\t{i:?}");
+        for (k, v) in i {
+            println!("\t{k}: {v}");
+        }
     }
 }

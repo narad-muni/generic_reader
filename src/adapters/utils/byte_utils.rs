@@ -37,6 +37,12 @@ pub fn col_from_buf(
     offset: &mut usize
 ) -> Result<Value, Box<dyn Error>> {
 
+    // Calculation for padding
+    if column.length % 2 == 0 && *offset % 2 == 1 {
+        println!("Adding offset at {} {}",column.name, offset);
+        *offset += 1;
+    }
+
     if column.offset.is_some() {
         *offset = column.offset.unwrap();
     }

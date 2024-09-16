@@ -74,7 +74,8 @@
                         {
                             "name": "TransactionCode",
                             "dtype": "short",
-                            "length": 2
+                            "length": 2,
+                            "default": true
                         },
                         {
                             "name": "ErrorCode",
@@ -119,12 +120,14 @@
                         {
                             "name": "Token",
                             "dtype": "s_int",
-                            "length": 4
+                            "length": 4,
+                            "default": true
                         },
                         {
                             "name": "MarketType",
                             "dtype": "short",
-                            "length": 2
+                            "length": 2,
+                            "default": true
                         },
                         {
                             "name": "FillPrice",
@@ -144,12 +147,14 @@
                         {
                             "name": "DayHiOI",
                             "dtype": "u_int",
-                            "length": 4
+                            "length": 4,
+                            "default": true
                         },
                         {
                             "name": "DayLoOI",
                             "dtype": "u_int",
-                            "length": 4
+                            "length": 4,
+                            "default": true
                         },
                         {
                             "name": "1_Token",
@@ -215,7 +220,8 @@
                         {
                             "name": "TransactionCode",
                             "dtype": "short",
-                            "length": 2
+                            "length": 2,
+                            "default": true
                         },
                         {
                             "name": "ErrorCode",
@@ -275,12 +281,14 @@
                         {
                             "name": "VolumeTradedToday",
                             "dtype": "u_int",
-                            "length": 4
+                            "length": 4,
+                            "default": true
                         },
                         {
                             "name": "LastTradedPrice",
                             "dtype": "s_int",
-                            "length": 4
+                            "length": 4,
+                            "default": true
                         },
                         {
                             "name": "NetChangeIndicator",
@@ -375,12 +383,14 @@
                         {
                             "name": "ClosingPrice",
                             "dtype": "s_int",
-                            "length": 4
+                            "length": 4,
+                            "default": true
                         },
                         {
                             "name": "OpenPrice",
                             "dtype": "s_int",
-                            "length": 4
+                            "length": 4,
+                            "default": true
                         },
                         {
                             "name": "HighPrice",
@@ -461,17 +471,20 @@
                         {
                             "name": "InstrumentName",
                             "dtype": "char",
-                            "length": 6
+                            "length": 6,
+                            "default": true
                         },
                         {
                             "name": "Symbol",
                             "dtype": "char",
-                            "length": 10
+                            "length": 10,
+                            "default": true
                         },
                         {
                             "name": "Series",
                             "dtype": "char",
-                            "length": 2
+                            "length": 2,
+                            "default": true
                         },
                         {
                             "name": "expiry date",
@@ -519,14 +532,44 @@
                             "length": 12
                         },
                         {
-                            "name": "struct_array",
-                            "dtype": "none",
-                            "length": 12
+                            "name": "0_Eligibility",
+                            "dtype": "char",
+                            "length": 1
                         },
                         {
-                            "name": "padding",
-                            "dtype": "none",
-                            "length": 4
+                            "name": "0_Status",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "1_Eligibility",
+                            "dtype": "char",
+                            "length": 1
+                        },
+                        {
+                            "name": "1_Status",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "2_Eligibility",
+                            "dtype": "char",
+                            "length": 1
+                        },
+                        {
+                            "name": "2_Status",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "3_Eligibility",
+                            "dtype": "char",
+                            "length": 1
+                        },
+                        {
+                            "name": "3_Status",
+                            "dtype": "short",
+                            "length": 2
                         },
                         {
                             "name": "IssueRate",
@@ -571,7 +614,8 @@
                         {
                             "name": "Name",
                             "dtype": "char",
-                            "length": 25
+                            "length": 25,
+                            "default": true
                         },
                         {
                             "name": "Reserved",
