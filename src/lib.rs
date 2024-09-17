@@ -65,6 +65,7 @@ pub struct PacketInfo {
 
 #[derive(Debug, Default, Deserialize)]
 pub struct NativeSettings {
+    packing: usize,
     packet_header: PacketHeader,
     packet_info: PacketInfo,
 }

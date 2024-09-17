@@ -28,6 +28,7 @@ pub fn cast_bytes(buf: &[u8], dtype: &DType) -> Result<Value, Box<dyn Error>> {
             serde_json::Number::from_f64(f64::from_be_bytes(buf.try_into()?)).ok_or("NaN")?,
         ),
         DType::None => Value::Null,
+        DType::Bit => Value::Null,
     })
 }
 
@@ -36,32 +37,17 @@ pub fn col_from_buf(
     buf: &[u8],
     offset: &mut usize,
     bit_offset: &mut usize,
+    packing: usize,
 ) -> Result<Value, Box<dyn Error>> {
 
-    println!("{} {}", column.name, offset);
+    // println!("{} {}", column.name, offset);
 
     // Calculation for padding
-    if column.length % 2 == 0 && *offset % 2 == 1 {
+    if column.length % packing == 0 && *offset % packing != 0 {
         // println!("Adding offset at {} {}",column.name, offset);
-        *offset += 1;
+        *offset += *offset % packing;
     }
 
-    if column.offset.is_some() {
-        *offset = column.offset.unwrap();
-    }
-
-    let slice = &buf[*offset..(*offset + column.length)];
-
-    *offset += column.length;
-
-    cast_bytes(slice, &column.dtype)
-}
-
-pub fn col_from_buf_no_padding(
-    column: &BufferValue,
-    buf: &[u8],
-    offset: &mut usize
-) -> Result<Value, Box<dyn Error>> {
     if column.offset.is_some() {
         *offset = column.offset.unwrap();
     }

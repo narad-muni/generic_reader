@@ -10,6 +10,7 @@
         "c"
     ],
     "native": {
+        "packing": 2,
         "packet_header": {
             "timestamp": {
                 "dtype": "u_int",

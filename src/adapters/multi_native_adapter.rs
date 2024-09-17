@@ -30,6 +30,7 @@ impl Readable for MultiNative {
         // Get all headers
         let packet_header = &config.native.packet_header;
         let packet_info = &config.native.packet_info;
+        let packing = config.native.packing;
 
         let header_size = get_len_from_columns(vec![&packet_header.timestamp, &packet_header.packet_size]);
 
@@ -46,8 +47,8 @@ impl Readable for MultiNative {
             }
 
             // Get timestamp and packet size from header
-            let timestamp = col_from_buf(&packet_header.timestamp, &buf, &mut offset, &mut 0)?;
-            let packet_size = col_from_buf(&packet_header.packet_size, &buf, &mut offset, &mut 0)?;
+            let timestamp = col_from_buf(&packet_header.timestamp, &buf, &mut offset, &mut 0, packing)?;
+            let packet_size = col_from_buf(&packet_header.packet_size, &buf, &mut offset, &mut 0, packing)?;
 
             // println!("timestamp {}", timestamp);
             // println!("packet size {}", packet_size);
@@ -58,7 +59,7 @@ impl Readable for MultiNative {
             let mut offset = 0;
 
             // get no of packets
-            let no_of_packets = col_from_buf(&packet_info.no_of_packets, &buf, &mut offset, &mut 0)?;
+            let no_of_packets = col_from_buf(&packet_info.no_of_packets, &buf, &mut offset, &mut 0, packing)?;
             // println!("no_of_packets {}", no_of_packets);
 
             // Read buffer
@@ -80,7 +81,7 @@ impl Readable for MultiNative {
                 let mut decompress_buf = [0; 2048];
 
                 // Get compressed packet size
-                let compressed_packet_size = col_from_buf(&packet_info.compressed_packet_size, &buf, &mut offset, &mut 0).unwrap();
+                let compressed_packet_size = col_from_buf(&packet_info.compressed_packet_size, &buf, &mut offset, &mut 0, packing).unwrap();
 
                 // println!("compressed_packet_size {}", compressed_packet_size);
 
@@ -106,8 +107,8 @@ impl Readable for MultiNative {
                 offset = 0;
 
                 // Packet size and identifier
-                let packet_identifier = col_from_buf(&packet_info.packet_identifier, &buf, &mut offset, &mut 0).unwrap();
-                let packet_size = col_from_buf(&packet_info.packet_size, &buf, &mut offset, &mut 0).unwrap();
+                let packet_identifier = col_from_buf(&packet_info.packet_identifier, &buf, &mut offset, &mut 0, packing).unwrap();
+                let packet_size = col_from_buf(&packet_info.packet_size, &buf, &mut offset, &mut 0, packing).unwrap();
 
                 // Set offset to 0 when starting to read form 0
                 offset = 0;
@@ -133,7 +134,7 @@ impl Readable for MultiNative {
 
                 hashmap.insert("timestamp".to_string(), timestamp.clone());
 
-                read_uncompressed(&column_details.columns, &buf[column_details.skip_bytes as usize..], &mut offset, &mut hashmap);
+                read_uncompressed(&column_details.columns, packing, &buf[column_details.skip_bytes as usize..], &mut offset, &mut hashmap);
 
                 values.push(hashmap);
 
@@ -150,7 +151,7 @@ impl Readable for MultiNative {
     }
 }
 
-fn read_uncompressed(columns: &Vec<BufferValue>, buf: &[u8], total_offset: &mut usize, hashmap: &mut Map<String, Value>){
+fn read_uncompressed(columns: &Vec<BufferValue>, packing: usize, buf: &[u8], total_offset: &mut usize, hashmap: &mut Map<String, Value>){
     // Offset to track position in buffer
     let mut offset = 0;
     let mut bit_offset = 0;
@@ -158,7 +159,7 @@ fn read_uncompressed(columns: &Vec<BufferValue>, buf: &[u8], total_offset: &mut 
     for column in columns {
         // Auto increment offset
         // Auto type cast based on value
-        let val = col_from_buf(column, &buf, &mut offset, &mut bit_offset).unwrap();
+        let val = col_from_buf(column, &buf, &mut offset, &mut bit_offset, packing).unwrap();
 
         // Null is used for padding
         // We can skip adding these columns
