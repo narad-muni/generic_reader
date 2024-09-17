@@ -117,7 +117,7 @@ impl Readable for MultiNative {
 
                 // Get column details or default
                 let column_details = packet_info.column_details.get(&packet_identifier.as_u64().unwrap()).unwrap_or_else(|| {
-                    packet_info.column_details.get(&0).expect(format!("Unable to find columns for {}", packet_identifier).as_str())
+                    packet_info.column_details.get(&0).expect(format!("Unable to find columns for {} at pos {pos}", packet_identifier).as_str())
                 });
 
                 // Calculate base for next packet
@@ -133,7 +133,7 @@ impl Readable for MultiNative {
 
                 hashmap.insert("timestamp".to_string(), timestamp.clone());
 
-                read_uncompressed(&column_details.columns, &buf, &mut offset, &mut hashmap);
+                read_uncompressed(&column_details.columns, &buf[column_details.skip_bytes as usize..], &mut offset, &mut hashmap);
 
                 values.push(hashmap);
 
