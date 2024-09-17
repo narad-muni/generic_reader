@@ -34,8 +34,11 @@ pub fn cast_bytes(buf: &[u8], dtype: &DType) -> Result<Value, Box<dyn Error>> {
 pub fn col_from_buf(
     column: &BufferValue,
     buf: &[u8],
-    offset: &mut usize
+    offset: &mut usize,
+    bit_offset: &mut usize,
 ) -> Result<Value, Box<dyn Error>> {
+
+    println!("{} {}", column.name, offset);
 
     // Calculation for padding
     if column.length % 2 == 0 && *offset % 2 == 1 {

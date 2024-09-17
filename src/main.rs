@@ -5,15 +5,15 @@ use reader::Reader;
 fn main() {
     // Assign reader adapters here
     let reader = Reader::new(
-        "/home/appadmin/Work/generic_reader/config.json".to_string(),
-        "out.txt".to_string(),
+        "/home/appadmin/Work/generic_reader/config_eq.json".to_string(),
+        "out_eq.txt".to_string(),
         reader::Type::MultiNative,
     )
     .unwrap();
 
     let start = Instant::now();
 
-    let data = reader.read(Some(11432), Some(1)).unwrap();
+    let data = reader.read(Some(7853), Some(1)).unwrap();
 
     println!(
         "{:?} for {:?} values\n {:?} per iter",

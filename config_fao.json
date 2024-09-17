@@ -1,0 +1,921 @@
+{
+    "use_default_columns": false,
+    "default_columns": [
+        "a",
+        "b",
+        "c",
+        "d"
+    ],
+    "selected_columns": [
+        "c"
+    ],
+    "native": {
+        "packet_header": {
+            "timestamp": {
+                "dtype": "u_int",
+                "offset": 0,
+                "length": 4
+            },
+            "packet_size": {
+                "dtype": "u_int",
+                "offset": 4,
+                "length": 4
+            }
+        },
+        "packet_info": {
+            "no_of_packets": {
+                "dtype": "short",
+                "offset": 2,
+                "length": 2
+            },
+            "compresseion_type": "lzo",
+            "compressed_packet_size": {
+                "dtype": "short",
+                "offset": 0,
+                "length": 2
+            },
+            "packet_identifier": {
+                "dtype": "short",
+                "offset": 18,
+                "length": 2,
+                "default": true
+            },
+            "packet_size": {
+                "dtype": "short",
+                "offset": 46,
+                "length": 2
+            },
+            "column_details": {
+                "7202": {
+                    "expected_size": 0,
+                    "skip_bytes": 8,
+                    "columns": [
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 4
+                        },
+                        {
+                            "name": "LogTime",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "AlphaChar",
+                            "dtype": "char",
+                            "length": 2
+                        },
+                        {
+                            "name": "TransactionCode",
+                            "dtype": "short",
+                            "length": 2,
+                            "default": true
+                        },
+                        {
+                            "name": "ErrorCode",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "BCSeqNo",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 1
+                        },
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 3
+                        },
+                        {
+                            "name": "TimeStamp2",
+                            "dtype": "char",
+                            "length": 8
+                        },
+                        {
+                            "name": "Filler2",
+                            "dtype": "char",
+                            "length": 8
+                        },
+                        {
+                            "name": "MessageLength",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "no_of_rec",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "Token",
+                            "dtype": "s_int",
+                            "length": 4,
+                            "default": true
+                        },
+                        {
+                            "name": "MarketType",
+                            "dtype": "short",
+                            "length": 2,
+                            "default": true
+                        },
+                        {
+                            "name": "FillPrice",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "FillVolume",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "OpenInterest",
+                            "dtype": "u_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "DayHiOI",
+                            "dtype": "u_int",
+                            "length": 4,
+                            "default": true
+                        },
+                        {
+                            "name": "DayLoOI",
+                            "dtype": "u_int",
+                            "length": 4,
+                            "default": true
+                        },
+                        {
+                            "name": "1_Token",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "1_MarketType",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "1_FillPrice",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "1_FillVolume",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "1_OpenInterest",
+                            "dtype": "u_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "1_DayHiOI",
+                            "dtype": "u_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "1_DayLoOI",
+                            "dtype": "u_int",
+                            "length": 4
+                        }
+                    ]
+                },
+                "7208": {
+                    "expected_size": 0,
+                    "skip_bytes": 8,
+                    "columns": [
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 4
+                        },
+                        {
+                            "name": "LogTime",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "Alphachar",
+                            "dtype": "char",
+                            "length": 2
+                        },
+                        {
+                            "name": "TransactionCode",
+                            "dtype": "short",
+                            "length": 2,
+                            "default": true
+                        },
+                        {
+                            "name": "ErrorCode",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "BCSeqNo",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 1
+                        },
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 3
+                        },
+                        {
+                            "name": "TimeStamp2",
+                            "dtype": "char",
+                            "length": 8
+                        },
+                        {
+                            "name": "Filler2",
+                            "dtype": "none",
+                            "length": 8
+                        },
+                        {
+                            "name": "MessageLength",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "no_of_rec",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "Token",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "BookType",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "TradingStatus",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "VolumeTradedToday",
+                            "dtype": "u_int",
+                            "length": 4,
+                            "default": true
+                        },
+                        {
+                            "name": "LastTradedPrice",
+                            "dtype": "s_int",
+                            "length": 4,
+                            "default": true
+                        },
+                        {
+                            "name": "NetChangeIndicator",
+                            "dtype": "char",
+                            "length": 2
+                        },
+                        {
+                            "name": "NetPriceChangeFromClosingPrice",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "LastTradeQuantity",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "LastTradeTime",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "AverageTradePrice",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "AuctionNumber",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "AuctionStatus",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "InitiatorType",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "InitiatorPrice",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "InitiatorQuantity",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "AuctionPrice",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "AuctionQuantity",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "RecordBuffer",
+                            "dtype": "char",
+                            "length": 120
+                        },
+                        {
+                            "name": "BbTotalBuyFlag",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "BbTotalSellFlag",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "TotalBuyQuantity",
+                            "dtype": "float",
+                            "length": 8
+                        },
+                        {
+                            "name": "TotalSellQuantity",
+                            "dtype": "float",
+                            "length": 8
+                        },
+                        {
+                            "name": "ST_INDICATOR",
+                            "dtype": "char",
+                            "length": 2
+                        },
+                        {
+                            "name": "ClosingPrice",
+                            "dtype": "s_int",
+                            "length": 4,
+                            "default": true
+                        },
+                        {
+                            "name": "OpenPrice",
+                            "dtype": "s_int",
+                            "length": 4,
+                            "default": true
+                        },
+                        {
+                            "name": "HighPrice",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "LowPrice",
+                            "dtype": "s_int",
+                            "length": 4
+                        }
+                    ]
+                },
+                "7340": {
+                    "expected_size": 0,
+                    "skip_bytes": 8,
+                    "columns": [
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 4
+                        },
+                        {
+                            "name": "LogTime",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "Alphachar",
+                            "dtype": "char",
+                            "length": 2
+                        },
+                        {
+                            "name": "TransactionCode",
+                            "default": true,
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "ErrorCode",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "BCSeqNo",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 1
+                        },
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 3
+                        },
+                        {
+                            "name": "TimeStamp2",
+                            "dtype": "char",
+                            "length": 8
+                        },
+                        {
+                            "name": "Filler2",
+                            "dtype": "none",
+                            "length": 8
+                        },
+                        {
+                            "name": "MessageLength",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "token",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "InstrumentName",
+                            "dtype": "char",
+                            "length": 6,
+                            "default": true
+                        },
+                        {
+                            "name": "Symbol",
+                            "dtype": "char",
+                            "length": 10,
+                            "default": true
+                        },
+                        {
+                            "name": "Series",
+                            "dtype": "char",
+                            "length": 2,
+                            "default": true
+                        },
+                        {
+                            "name": "expiry date",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "strike price",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "option type",
+                            "dtype": "char",
+                            "length": 2
+                        },
+                        {
+                            "name": "ca level",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "PermittedToTrade",
+                            "dtype": "char",
+                            "length": 2
+                        },
+                        {
+                            "name": "IssuedCapital",
+                            "dtype": "float",
+                            "length": 8
+                        },
+                        {
+                            "name": "WarningQuantity",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "FreezeQuantity",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "CreditRating",
+                            "dtype": "char",
+                            "length": 12
+                        },
+                        {
+                            "name": "0_Eligibility",
+                            "dtype": "char",
+                            "length": 1
+                        },
+                        {
+                            "name": "0_Status",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "1_Eligibility",
+                            "dtype": "char",
+                            "length": 1
+                        },
+                        {
+                            "name": "1_Status",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "2_Eligibility",
+                            "dtype": "char",
+                            "length": 1
+                        },
+                        {
+                            "name": "2_Status",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "3_Eligibility",
+                            "dtype": "char",
+                            "length": 1
+                        },
+                        {
+                            "name": "3_Status",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "IssueRate",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "IssueStartDate",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "InterestPaymentDate",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "IssueMaturityDate",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "MarginPercentage",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "MinimumLotQuantity",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "BoardLotQuantity",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "TickSize",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "Name",
+                            "dtype": "char",
+                            "length": 25,
+                            "default": true
+                        },
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 1
+                        },
+                        {
+                            "name": "ListingDate",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "ExpulsionDate",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "ReAdmissionDate",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "RecordDate",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "LowPriceRange",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "HighPriceRange",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "ExpiryDate",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "NoDeliveryStartDate",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "NoDeliveryEndDate",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "ST_ELIGIBLITY",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "BookClosureStartDate",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "BookClosureEndDate",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "ExerciseStartDate",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "ExerciseEndDate",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "OldToken",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "AssetInstrument",
+                            "dtype": "char",
+                            "length": 6
+                        },
+                        {
+                            "name": "AssetName",
+                            "dtype": "char",
+                            "length": 10
+                        },
+                        {
+                            "name": "AssetToken",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "IntrinsicValue",
+                            "dtype": "s_int",
+                            "length": 4
+                        }
+                    ]
+                },
+                "7211": {
+                    "expected_size": 0,
+                    "skip_bytes": 8,
+                    "columns": [
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 4
+                        },
+                        {
+                            "name": "LogTime",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "Alphachar",
+                            "dtype": "char",
+                            "length": 2
+                        },
+                        {
+                            "name": "TransactionCode",
+                            "default": true,
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "ErrorCode",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "BCSeqNo",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 1
+                        },
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 3
+                        },
+                        {
+                            "name": "TimeStamp2",
+                            "dtype": "char",
+                            "length": 8
+                        },
+                        {
+                            "name": "Filler2",
+                            "dtype": "none",
+                            "length": 8
+                        },
+                        {
+                            "name": "MessageLength",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "Token1",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "Token2",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {"name":"MbpBuy","dtype":"short","length":2},
+                        {"name":"MbpSell","dtype":"short","length":2},
+                        {"name":"LastActiveTime","dtype":"s_int","length":4},
+                        {"name":"TradedVolume","dtype":"u_int","length":4},
+                        {"name":"TotalTradedValue","dtype":"float","length":8},
+                        {"name":"MbpBuys[0].NoOrders","dtype":"short","length":2},
+                        {"name":"MbpBuys[0].Volume","dtype":"s_int","length":4},
+                        {"name":"MbpBuys[0].Price","dtype":"s_int","length":4},
+                        {"name":"MbpBuys[1].NoOrders","dtype":"short","length":2},
+                        {"name":"MbpBuys[1].Volume","dtype":"s_int","length":4},
+                        {"name":"MbpBuys[1].Price","dtype":"s_int","length":4},
+                        {"name":"MbpBuys[2].NoOrders","dtype":"short","length":2},
+                        {"name":"MbpBuys[2].Volume","dtype":"s_int","length":4},
+                        {"name":"MbpBuys[2].Price","dtype":"s_int","length":4},
+                        {"name":"MbpBuys[3].NoOrders","dtype":"short","length":2},
+                        {"name":"MbpBuys[3].Volume","dtype":"s_int","length":4},
+                        {"name":"MbpBuys[3].Price","dtype":"s_int","length":4},
+                        {"name":"MbpBuys[4].NoOrders","dtype":"short","length":2},
+                        {"name":"MbpBuys[4].Volume","dtype":"s_int","length":4},
+                        {"name":"MbpBuys[4].Price","dtype":"s_int","length":4},
+                        {"name":"MbpSells[0].NoOrders","dtype":"short","length":2},
+                        {"name":"MbpSells[0].Volume","dtype":"s_int","length":4},
+                        {"name":"MbpSells[0].Price","dtype":"s_int","length":4},
+                        {"name":"MbpSells[1].NoOrders","dtype":"short","length":2},
+                        {"name":"MbpSells[1].Volume","dtype":"s_int","length":4},
+                        {"name":"MbpSells[1].Price","dtype":"s_int","length":4},
+                        {"name":"MbpSells[2].NoOrders","dtype":"short","length":2},
+                        {"name":"MbpSells[2].Volume","dtype":"s_int","length":4},
+                        {"name":"MbpSells[2].Price","dtype":"s_int","length":4},
+                        {"name":"MbpSells[3].NoOrders","dtype":"short","length":2},
+                        {"name":"MbpSells[3].Volume","dtype":"s_int","length":4},
+                        {"name":"MbpSells[3].Price","dtype":"s_int","length":4},
+                        {"name":"MbpSells[4].NoOrders","dtype":"short","length":2},
+                        {"name":"MbpSells[4].Volume","dtype":"s_int","length":4},
+                        {"name":"MbpSells[4].Price","dtype":"s_int","length":4},
+                        {"name":"TotalOrderVolume.Buy","dtype":"float","length":8},
+                        {"name":"TotalOrderVolume.Sell","dtype":"float","length":8},
+                        {"name":"OpenPriceDifference","dtype":"s_int","length":4},
+                        {"name":"DayHighPriceDifference","dtype":"s_int","length":4},
+                        {"name":"DayLowPriceDifference","dtype":"s_int","length":4},
+                        {"name":"LastTradedPriceDifference","dtype":"s_int","length":4},
+                        {"name":"LastUpdateTime","dtype":"s_int","length":4}
+                    ]
+                },
+                "6541": {
+                    "expected_size": 0,
+                    "skip_bytes": 8,
+                    "columns": [
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 4
+                        },
+                        {
+                            "name": "LogTime",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "Alphachar",
+                            "dtype": "char",
+                            "length": 2
+                        },
+                        {
+                            "name": "TransactionCode",
+                            "default": true,
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "ErrorCode",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "BCSeqNo",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 1
+                        },
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 3
+                        },
+                        {
+                            "name": "TimeStamp2",
+                            "dtype": "char",
+                            "length": 8
+                        },
+                        {
+                            "name": "Filler2",
+                            "dtype": "none",
+                            "length": 8
+                        },
+                        {
+                            "name": "MessageLength",
+                            "dtype": "short",
+                            "length": 2
+                        }
+                    ]
+                },
+                "1": {
+                    "expected_size": 256,
+                    "columns": []
+                }
+            }
+        }
+    },
+    "native_columns": [
+        {
+            "name": "id",
+            "dtype": "u_int",
+            "offset": 0,
+            "length": 4
+        },
+        {
+            "name": "name",
+            "dtype": "char",
+            "offset": 4,
+            "length": 6
+        },
+        {
+            "name": "active",
+            "dtype": "bool",
+            "offset": 10,
+            "length": 1
+        },
+        {
+            "name": "points",
+            "dtype": "float",
+            "offset": 11,
+            "length": 8
+        }
+    ]
+}

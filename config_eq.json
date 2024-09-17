@@ -1,0 +1,178 @@
+{
+    "selected_columns": [],
+    "native": {
+        "packet_header": {
+            "timestamp": {
+                "dtype": "u_int",
+                "offset": 0,
+                "length": 4
+            },
+            "packet_size": {
+                "dtype": "u_int",
+                "offset": 4,
+                "length": 4
+            }
+        },
+        "packet_info": {
+            "no_of_packets": {
+                "dtype": "short",
+                "offset": 2,
+                "length": 2
+            },
+            "compresseion_type": "lzo",
+            "compressed_packet_size": {
+                "dtype": "short",
+                "offset": 0,
+                "length": 2
+            },
+            "packet_identifier": {
+                "dtype": "short",
+                "offset": 18,
+                "length": 2,
+                "default": true
+            },
+            "packet_size": {
+                "dtype": "short",
+                "offset": 46,
+                "length": 2
+            },
+            "column_details": {
+                "18705": {
+                    "expected_size": 0,
+                    "skip_bytes": 8,
+                    "columns": [
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 4
+                        },
+                        {
+                            "name": "LogTime",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "Alphachar",
+                            "dtype": "char",
+                            "length": 2
+                        },
+                        {
+                            "name": "TransactionCode",
+                            "default": true,
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "ErrorCode",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "BCSeqNo",
+                            "dtype": "s_int",
+                            "length": 4
+                        },
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 1
+                        },
+                        {
+                            "name": "Reserved",
+                            "dtype": "none",
+                            "length": 3
+                        },
+                        {
+                            "name": "TimeStamp2",
+                            "dtype": "char",
+                            "length": 8
+                        },
+                        {
+                            "name": "Filler2",
+                            "dtype": "none",
+                            "length": 8
+                        },
+                        {
+                            "name": "MessageLength",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {
+                            "name": "NoOfRecords",
+                            "dtype": "short",
+                            "length": 2
+                        },
+                        {"name":"Token","dtype": "s_int","length":4},
+                        {"name":"BookType","dtype": "short","length":2},
+                        {"name":"TradingStatus","dtype": "short","length":2},
+                        {"name":"VolumeTradedToday","dtype": "u_int","length":4},
+                        {"name":"LastTradedPrice","dtype": "s_int","length":4},
+                        {"name":"NetChangeIndicator","dtype": "char","length":1},
+                        {"name":"Filler","dtype": "char","length":1},
+                        {"name":"NetPriceChangeFromClosingPrice","dtype": "s_int","length":4},
+                        {"name":"LastTradeQuantity","dtype": "s_int","length":4},
+                        {"name":"LastTradeTime","dtype": "s_int","length":4},
+                        {"name":"AverageTradePrice","dtype": "s_int","length":4},
+                        {"name":"AuctionNumber","dtype": "short","length":2},
+                        {"name":"AuctionStatus","dtype": "short","length":2},
+                        {"name":"InitiatorType","dtype": "short","length":2},
+                        {"name":"InitiatorPrice","dtype": "s_int","length":4},
+                        {"name":"InitiatorQuantity","dtype": "s_int","length":4},
+                        {"name":"AuctionPrice","dtype": "s_int","length":4},
+                        {"name":"AuctionQuantity","dtype": "s_int","length":4},
+                        {"name":"RecordBuffer[0].Quantity", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[0].Price", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[0].NumberOfOrders", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[0].BbBuySellFlag", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[1].Quantity", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[1].Price", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[1].NumberOfOrders", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[1].BbBuySellFlag", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[2].Quantity", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[2].Price", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[2].NumberOfOrders", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[2].BbBuySellFlag", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[3].Quantity", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[3].Price", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[3].NumberOfOrders", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[3].BbBuySellFlag", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[4].Quantity", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[4].Price", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[4].NumberOfOrders", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[4].BbBuySellFlag", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[5].Quantity", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[5].Price", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[5].NumberOfOrders", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[5].BbBuySellFlag", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[6].Quantity", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[6].Price", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[6].NumberOfOrders", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[6].BbBuySellFlag", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[7].Quantity", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[7].Price", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[7].NumberOfOrders", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[7].BbBuySellFlag", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[8].Quantity", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[8].Price", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[8].NumberOfOrders", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[8].BbBuySellFlag", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[9].Quantity", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[9].Price", "dtype":"s_int", "length":4},
+                        {"name":"RecordBuffer[9].NumberOfOrders", "dtype":"short", "length":2},
+                        {"name":"RecordBuffer[9].BbBuySellFlag", "dtype":"short", "length":2},
+                        {"name":"BbTotalBuyFlag","dtype": "short","length":2},
+                        {"name":"BbTotalSellFlag","dtype": "short","length":2},
+                        {"name":"TotalBuyQuantity","dtype": "float","length":8},
+                        {"name":"TotalSellQuantity","dtype": "float","length":8},
+                        {"name":"MBP_INDICATOR.LastTradeMore","dtype": "byte","length":1},
+                        {"name":"MBP_INDICATOR.Reserved","dtype": "char","length":1},
+                        {"name":"ClosingPrice","dtype": "s_int","length":4},
+                        {"name":"OpenPrice","dtype": "s_int","length":4},
+                        {"name":"HighPrice","dtype": "s_int","length":4},
+                        {"name":"LowPrice","dtype": "s_int","length":4}
+                    ]
+                }
+            }
+        }
+    }
+}

@@ -102,15 +102,13 @@ pub enum DType {
     Float,
     Bool,
     Byte,
+    Bit,
     #[default]
     None,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct Config {
-    /// flag to select all columns
-    pub all_columns: bool,
-
     /// Selected columns to display
     pub selected_columns: Vec<String>,
 
@@ -160,10 +158,6 @@ impl Reader {
             file_path,
             _type,
         }
-    }
-
-    pub fn all_columns(&mut self, all_columns: bool) {
-        self.config.all_columns = all_columns;
     }
 
     pub fn read(
