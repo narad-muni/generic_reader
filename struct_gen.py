@@ -1,19 +1,38 @@
 data = '''
-MESSAGE_HEADER STRUCT 40 0
-MessageType CHAR 1 40
-Reserved CHAR 1 41
-NoOfRecords SHORT 2 42
-SPD_STATS_DATA[3] STRUCT 78 44
+BCAST_HEADER STRUCT 40 0
+SEC_INFO STRUCT 12 40
+MarketType SHORT 2 52
+BROADCAST_DESTINATION STRUCT 2 54
+BroadcastMessageLength SHORT 2 56
+BroadcastMessage CHAR 240 58
+'''
+
+BROADCAST_DESTINATION = '''
+TraderWs BIT 1 0
+Reserved BIT 7 0
+Reserved CHAR 1 1
+'''
+
+IndicativeIndices = '''
+IndexName CHAR 21 0
+IndicativeCloseValue LONG 4 21
+Reserved LONG 4 25
+Reserved LONG 4 29
+Reserved LONG 4 33
+ClosingIndex LONG 4 37
+PercentChange LONG 4 41
+Reserved LONG 4 45
+Reserved LONG 4 49
+Change LONG 4 53
+Reserved LONG 4 57
+MarketCapitalization DOUBLE 8 61
+NetChangeIndicator CHAR 1 69
+FILLER CHAR 1 70
 '''
 
 SEC_INFO = '''
-InstrumentName CHAR 6 0
-Symbol CHAR 10 6
-Series CHAR 2 16
-ExpiryDate LONG 4 18
-StrikePrice LONG 4 22
-OptionType CHAR 2 26
-CALevel SHORT 2 28
+Symbol CHAR 10 0
+Series CHAR 2 10
 '''
 SPD_STATS_DATA = '''
 MARKETTYPE SHORT 2 0
@@ -102,6 +121,8 @@ struct_mapping = {
     "SEC_INFO": SEC_INFO,
     "MESSAGE_HEADER": MSG_HEADER,
     "SPD_STATS_DATA": SPD_STATS_DATA,
+    "IndicativeIndices": IndicativeIndices,
+    "BROADCAST_DESTINATION": BROADCAST_DESTINATION,
 }
 
 dtype_mapping = {
