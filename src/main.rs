@@ -5,8 +5,8 @@ use reader::Reader;
 fn main() {
     // Assign reader adapters here
     let reader = Reader::new(
-        "/home/appadmin/Work/generic_reader/config_fao.json".to_string(),
-        "out_fao.txt".to_string(),
+        "/home/appadmin/Work/generic_reader/config_eq.json".to_string(),
+        "out_eq.txt".to_string(),
         reader::Type::MultiNative,
     )
     .unwrap();
@@ -23,7 +23,10 @@ fn main() {
     );
 
     if data.len() > 0 {
-        println!("Columns: \n\t{:?}", data[0].keys().collect::<Vec<&String>>());
+        println!(
+            "Columns: \n\t{:?}",
+            data[0].keys().collect::<Vec<&String>>()
+        );
     }
 
     println!("Data: ");

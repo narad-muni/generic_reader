@@ -1,4 +1,4 @@
-use std::{collections::HashMap, error::Error, fmt::Debug, fs};
+use std::{collections::HashMap, default, error::Error, fmt::Debug, fs};
 
 use adapters::{
     csv_adapter::CsvAdapter, json_lines_adapter::JsonLineAdapter,
@@ -30,6 +30,8 @@ pub struct BufferValue {
     length: usize,
     #[serde(default)]
     default: bool,
+    #[serde(default)]
+    ignore: bool,
 }
 
 #[derive(Debug, Default, Deserialize)]
@@ -46,7 +48,7 @@ pub struct PacketColumns {
     columns: Vec<BufferValue>,
 }
 
-#[derive(Debug, Default, Deserialize,PartialEq)]
+#[derive(Debug, Default, Deserialize, PartialEq)]
 #[serde(rename_all = "snake_case")]
 pub enum CompressionType {
     #[default]
@@ -180,33 +182,40 @@ impl Reader {
         // For csv like structures
         if (_type == Type::Csv || _type == Type::JsonArray) && config.use_default_columns {
             config.default_columns.iter().for_each(|c| {
-                columns.insert(c.to_string(), Value::Bool(
-                    // If column is in selected columns
-                    config.selected_columns.contains(&c.to_string())
-                ));
+                columns.insert(
+                    c.to_string(),
+                    Value::Bool(
+                        // If column is in selected columns
+                        config.selected_columns.contains(&c.to_string()),
+                    ),
+                );
             });
-        }else if _type == Type::Native {
+        } else if _type == Type::Native {
             config.native_columns.iter().for_each(|c| {
-
                 if c.dtype == DType::None {
                     return;
                 }
 
                 columns.insert(c.name.to_string(), Value::Bool(c.default));
             });
-        }else if _type == Type::MultiNative {
-            config.native.packet_info.column_details.values().for_each(|c| {
-                c.columns.iter().for_each(|c| {
+        } else if _type == Type::MultiNative {
+            config
+                .native
+                .packet_info
+                .column_details
+                .values()
+                .for_each(|c| {
+                    c.columns.iter().for_each(|c| {
+                        if c.dtype == DType::None {
+                            return;
+                        }
 
-                    if c.dtype == DType::None {
-                        return;
-                    }
-
-                    if columns.get(&c.name).is_none() || columns.get(&c.name).unwrap() == false {
-                        columns.insert(c.name.to_string(), Value::Bool(c.default));
-                    }
-                });
-            })
+                        if columns.get(&c.name).is_none() || columns.get(&c.name).unwrap() == false
+                        {
+                            columns.insert(c.name.to_string(), Value::Bool(c.default));
+                        }
+                    });
+                })
         }
 
         columns

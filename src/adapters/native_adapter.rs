@@ -60,7 +60,7 @@ impl Readable for NativeAdapter {
             if pos >= len {
                 break;
             }
-            
+
             let mut hashmap = Map::new();
 
             // Cast for each column

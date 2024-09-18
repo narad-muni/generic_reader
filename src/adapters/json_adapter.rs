@@ -28,10 +28,7 @@ impl Readable for JsonAdapter {
         let from = from.unwrap_or(0).min(length);
         let to = (from + len).min(length);
 
-        let data = data[from..to]
-            .iter()
-            .map(|i| i.clone())
-            .collect::<Vec<_>>();
+        let data = data[from..to].iter().map(|i| i.clone()).collect::<Vec<_>>();
 
         Ok(data)
     }
