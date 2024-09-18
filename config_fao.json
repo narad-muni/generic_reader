@@ -48,7 +48,6 @@
             },
             "column_details": {
                 "7202": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {
@@ -189,7 +188,6 @@
                     ]
                 },
                 "7208": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {
@@ -395,7 +393,6 @@
                     ]
                 },
                 "7340": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {
@@ -711,7 +708,6 @@
                     ]
                 },
                 "7211": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {
@@ -825,7 +821,6 @@
                     ]
                 },
                 "6541": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {
@@ -887,7 +882,6 @@
                     ]
                 },
                 "7130": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {"name":"Reserved","dtype":"char","length":2},
@@ -1018,7 +1012,6 @@
                     ]
                 },
                 "6501": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {"name":"BCAST_HEADER.Reserved","dtype":"char","length":2},
@@ -1048,7 +1041,6 @@
                     ]
                 },
                 "6521": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {"name":"BCAST_HEADER.Reserved","dtype":"char","length":2},
@@ -1083,7 +1075,6 @@
                     ]
                 },
                 "7306": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {"name":"BCAST_HEADER.Reserved","dtype":"char","length":2},
@@ -1106,7 +1097,6 @@
                     ]
                 },
                 "1833": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {"name":"MESSAGE_HEADER.TransactionCode","dtype":"short","length":2},
@@ -1128,7 +1118,6 @@
                     ]
                 },
                 "1862": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {"name":"MESSAGE_HEADER.TransactionCode","dtype":"short","length":2},
@@ -1200,7 +1189,6 @@
                     ]
                 },
                 "1": {
-                    "expected_size": 256,
                     "columns": []
                 }
             }

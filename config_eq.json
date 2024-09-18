@@ -39,7 +39,6 @@
             },
             "column_details": {
                 "18705": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {
@@ -178,7 +177,6 @@
                     ]
                 },
                 "7208": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {
@@ -391,7 +389,6 @@
                     ]
                 },
                 "18703": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {
@@ -598,7 +595,6 @@
                     ]
                 },
                 "7207": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {
@@ -749,7 +745,6 @@
                     ]
                 },
                 "7216": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {
@@ -900,7 +895,6 @@
                     ]
                 },
                 "18710": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {
@@ -1034,7 +1028,6 @@
                     ]
                 },
                 "7214": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {
@@ -1154,7 +1147,6 @@
                     ]
                 },
                 "6541": {
-                    "expected_size": 0,
                     "skip_bytes": 8,
                     "columns": [
                         {
