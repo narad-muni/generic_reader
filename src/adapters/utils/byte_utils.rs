@@ -9,23 +9,34 @@ pub fn cast_bytes(buf: &[u8], dtype: &DType) -> Result<Value, Box<dyn Error>> {
         DType::Byte => Value::Number(serde_json::Number::from(u8::from_be_bytes(
             buf.to_vec()
                 .try_into()
-                .map_err(|_| "Failed to convert to u32")?,
+                .map_err(|_| "Failed to convert to byte")?,
         ))),
         DType::Char => Value::String(String::from_utf8_lossy(buf).to_string()),
         DType::Bool => Value::Bool(buf[0] != 0),
-        DType::UInt => Value::Number(serde_json::Number::from(u32::from_be_bytes(
+        DType::U32 => Value::Number(serde_json::Number::from(u32::from_be_bytes(
             buf.to_vec()
                 .try_into()
                 .map_err(|_| "Failed to convert to u32")?,
         ))),
+        DType::U64 => Value::Number(serde_json::Number::from(u64::from_be_bytes(
+            buf.to_vec()
+                .try_into()
+                .map_err(|_| "Failed to convert to u64")?,
+        ))),
         DType::Short => Value::Number(serde_json::Number::from(i16::from_be_bytes(
             buf.try_into()?,
         ))),
-        DType::SInt => Value::Number(serde_json::Number::from(i32::from_be_bytes(
+        DType::I32 => Value::Number(serde_json::Number::from(i32::from_be_bytes(
             buf.try_into()?,
         ))),
-        DType::Float => Value::Number(
-            serde_json::Number::from_f64(f64::from_be_bytes(buf.try_into()?)).ok_or("NaN")?,
+        DType::I64 => Value::Number(serde_json::Number::from(i64::from_be_bytes(
+            buf.try_into()?,
+        ))),
+        DType::F32 => Value::Number(
+            serde_json::Number::from_f64(f32::from_be_bytes(buf.try_into()?) as f64).ok_or("NaN f32")?,
+        ),
+        DType::F64 => Value::Number(
+            serde_json::Number::from_f64(f64::from_be_bytes(buf.try_into()?)).ok_or(format!("NaN f64 {:?}", buf))?
         ),
         DType::None => Value::Null,
         DType::Bit => {

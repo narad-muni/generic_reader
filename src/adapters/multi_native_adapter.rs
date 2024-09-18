@@ -22,8 +22,8 @@ impl Readable for MultiNative {
         &self,
         file_path: &String,
         config: &crate::Config,
-        from: Option<usize>,
-        len: usize,
+        from: Option<u64>,
+        len: u64,
     ) -> Result<Vec<Map<String, Value>>, Box<dyn Error>> {
         let from = from.unwrap_or(0);
 

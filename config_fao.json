@@ -13,12 +13,12 @@
         "packing": 2,
         "packet_header": {
             "timestamp": {
-                "dtype": "u_int",
+                "dtype": "u32",
                 "offset": 0,
                 "length": 4
             },
             "packet_size": {
-                "dtype": "u_int",
+                "dtype": "u32",
                 "offset": 4,
                 "length": 4
             }
@@ -58,7 +58,7 @@
                         },
                         {
                             "name": "LogTime",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -79,7 +79,7 @@
                         },
                         {
                             "name": "BCSeqNo",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -114,7 +114,7 @@
                         },
                         {
                             "name": "Token",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4,
                             "default": true
                         },
@@ -126,34 +126,34 @@
                         },
                         {
                             "name": "FillPrice",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "FillVolume",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "OpenInterest",
-                            "dtype": "u_int",
+                            "dtype": "u32",
                             "length": 4
                         },
                         {
                             "name": "DayHiOI",
-                            "dtype": "u_int",
+                            "dtype": "u32",
                             "length": 4,
                             "default": true
                         },
                         {
                             "name": "DayLoOI",
-                            "dtype": "u_int",
+                            "dtype": "u32",
                             "length": 4,
                             "default": true
                         },
                         {
                             "name": "1_Token",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -163,27 +163,27 @@
                         },
                         {
                             "name": "1_FillPrice",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "1_FillVolume",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "1_OpenInterest",
-                            "dtype": "u_int",
+                            "dtype": "u32",
                             "length": 4
                         },
                         {
                             "name": "1_DayHiOI",
-                            "dtype": "u_int",
+                            "dtype": "u32",
                             "length": 4
                         },
                         {
                             "name": "1_DayLoOI",
-                            "dtype": "u_int",
+                            "dtype": "u32",
                             "length": 4
                         }
                     ]
@@ -199,7 +199,7 @@
                         },
                         {
                             "name": "LogTime",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -220,7 +220,7 @@
                         },
                         {
                             "name": "BCSeqNo",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -255,7 +255,7 @@
                         },
                         {
                             "name": "Token",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -270,13 +270,13 @@
                         },
                         {
                             "name": "VolumeTradedToday",
-                            "dtype": "u_int",
+                            "dtype": "u32",
                             "length": 4,
                             "default": true
                         },
                         {
                             "name": "LastTradedPrice",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4,
                             "default": true
                         },
@@ -287,22 +287,22 @@
                         },
                         {
                             "name": "NetPriceChangeFromClosingPrice",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "LastTradeQuantity",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "LastTradeTime",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "AverageTradePrice",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -322,22 +322,22 @@
                         },
                         {
                             "name": "InitiatorPrice",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "InitiatorQuantity",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "AuctionPrice",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "AuctionQuantity",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -357,12 +357,12 @@
                         },
                         {
                             "name": "TotalBuyQuantity",
-                            "dtype": "float",
+                            "dtype": "f64",
                             "length": 8
                         },
                         {
                             "name": "TotalSellQuantity",
-                            "dtype": "float",
+                            "dtype": "f64",
                             "length": 8
                         },
                         {
@@ -372,24 +372,24 @@
                         },
                         {
                             "name": "ClosingPrice",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4,
                             "default": true
                         },
                         {
                             "name": "OpenPrice",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4,
                             "default": true
                         },
                         {
                             "name": "HighPrice",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "LowPrice",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         }
                     ]
@@ -405,7 +405,7 @@
                         },
                         {
                             "name": "LogTime",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -426,7 +426,7 @@
                         },
                         {
                             "name": "BCSeqNo",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -456,7 +456,7 @@
                         },
                         {
                             "name": "token",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -479,12 +479,12 @@
                         },
                         {
                             "name": "expiry date",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "strike price",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -504,17 +504,17 @@
                         },
                         {
                             "name": "IssuedCapital",
-                            "dtype": "float",
+                            "dtype": "f64",
                             "length": 8
                         },
                         {
                             "name": "WarningQuantity",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "FreezeQuantity",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -569,37 +569,37 @@
                         },
                         {
                             "name": "IssueStartDate",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "InterestPaymentDate",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "IssueMaturityDate",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "MarginPercentage",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "MinimumLotQuantity",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "BoardLotQuantity",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "TickSize",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -615,47 +615,47 @@
                         },
                         {
                             "name": "ListingDate",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "ExpulsionDate",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "ReAdmissionDate",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "RecordDate",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "LowPriceRange",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "HighPriceRange",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "ExpiryDate",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "NoDeliveryStartDate",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "NoDeliveryEndDate",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -665,27 +665,27 @@
                         },
                         {
                             "name": "BookClosureStartDate",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "BookClosureEndDate",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "ExerciseStartDate",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "ExerciseEndDate",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "OldToken",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -700,12 +700,12 @@
                         },
                         {
                             "name": "AssetToken",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "IntrinsicValue",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         }
                     ]
@@ -721,7 +721,7 @@
                         },
                         {
                             "name": "LogTime",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -742,7 +742,7 @@
                         },
                         {
                             "name": "BCSeqNo",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -772,56 +772,56 @@
                         },
                         {
                             "name": "Token1",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
                             "name": "Token2",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {"name":"MbpBuy","dtype":"short","length":2},
                         {"name":"MbpSell","dtype":"short","length":2},
-                        {"name":"LastActiveTime","dtype":"s_int","length":4},
-                        {"name":"TradedVolume","dtype":"u_int","length":4},
-                        {"name":"TotalTradedValue","dtype":"float","length":8},
+                        {"name":"LastActiveTime","dtype":"i32","length":4},
+                        {"name":"TradedVolume","dtype":"u32","length":4},
+                        {"name":"TotalTradedValue","dtype":"f64","length":8},
                         {"name":"MbpBuys[0].NoOrders","dtype":"short","length":2},
-                        {"name":"MbpBuys[0].Volume","dtype":"s_int","length":4},
-                        {"name":"MbpBuys[0].Price","dtype":"s_int","length":4},
+                        {"name":"MbpBuys[0].Volume","dtype":"i32","length":4},
+                        {"name":"MbpBuys[0].Price","dtype":"i32","length":4},
                         {"name":"MbpBuys[1].NoOrders","dtype":"short","length":2},
-                        {"name":"MbpBuys[1].Volume","dtype":"s_int","length":4},
-                        {"name":"MbpBuys[1].Price","dtype":"s_int","length":4},
+                        {"name":"MbpBuys[1].Volume","dtype":"i32","length":4},
+                        {"name":"MbpBuys[1].Price","dtype":"i32","length":4},
                         {"name":"MbpBuys[2].NoOrders","dtype":"short","length":2},
-                        {"name":"MbpBuys[2].Volume","dtype":"s_int","length":4},
-                        {"name":"MbpBuys[2].Price","dtype":"s_int","length":4},
+                        {"name":"MbpBuys[2].Volume","dtype":"i32","length":4},
+                        {"name":"MbpBuys[2].Price","dtype":"i32","length":4},
                         {"name":"MbpBuys[3].NoOrders","dtype":"short","length":2},
-                        {"name":"MbpBuys[3].Volume","dtype":"s_int","length":4},
-                        {"name":"MbpBuys[3].Price","dtype":"s_int","length":4},
+                        {"name":"MbpBuys[3].Volume","dtype":"i32","length":4},
+                        {"name":"MbpBuys[3].Price","dtype":"i32","length":4},
                         {"name":"MbpBuys[4].NoOrders","dtype":"short","length":2},
-                        {"name":"MbpBuys[4].Volume","dtype":"s_int","length":4},
-                        {"name":"MbpBuys[4].Price","dtype":"s_int","length":4},
+                        {"name":"MbpBuys[4].Volume","dtype":"i32","length":4},
+                        {"name":"MbpBuys[4].Price","dtype":"i32","length":4},
                         {"name":"MbpSells[0].NoOrders","dtype":"short","length":2},
-                        {"name":"MbpSells[0].Volume","dtype":"s_int","length":4},
-                        {"name":"MbpSells[0].Price","dtype":"s_int","length":4},
+                        {"name":"MbpSells[0].Volume","dtype":"i32","length":4},
+                        {"name":"MbpSells[0].Price","dtype":"i32","length":4},
                         {"name":"MbpSells[1].NoOrders","dtype":"short","length":2},
-                        {"name":"MbpSells[1].Volume","dtype":"s_int","length":4},
-                        {"name":"MbpSells[1].Price","dtype":"s_int","length":4},
+                        {"name":"MbpSells[1].Volume","dtype":"i32","length":4},
+                        {"name":"MbpSells[1].Price","dtype":"i32","length":4},
                         {"name":"MbpSells[2].NoOrders","dtype":"short","length":2},
-                        {"name":"MbpSells[2].Volume","dtype":"s_int","length":4},
-                        {"name":"MbpSells[2].Price","dtype":"s_int","length":4},
+                        {"name":"MbpSells[2].Volume","dtype":"i32","length":4},
+                        {"name":"MbpSells[2].Price","dtype":"i32","length":4},
                         {"name":"MbpSells[3].NoOrders","dtype":"short","length":2},
-                        {"name":"MbpSells[3].Volume","dtype":"s_int","length":4},
-                        {"name":"MbpSells[3].Price","dtype":"s_int","length":4},
+                        {"name":"MbpSells[3].Volume","dtype":"i32","length":4},
+                        {"name":"MbpSells[3].Price","dtype":"i32","length":4},
                         {"name":"MbpSells[4].NoOrders","dtype":"short","length":2},
-                        {"name":"MbpSells[4].Volume","dtype":"s_int","length":4},
-                        {"name":"MbpSells[4].Price","dtype":"s_int","length":4},
-                        {"name":"TotalOrderVolume.Buy","dtype":"float","length":8},
-                        {"name":"TotalOrderVolume.Sell","dtype":"float","length":8},
-                        {"name":"OpenPriceDifference","dtype":"s_int","length":4},
-                        {"name":"DayHighPriceDifference","dtype":"s_int","length":4},
-                        {"name":"DayLowPriceDifference","dtype":"s_int","length":4},
-                        {"name":"LastTradedPriceDifference","dtype":"s_int","length":4},
-                        {"name":"LastUpdateTime","dtype":"s_int","length":4}
+                        {"name":"MbpSells[4].Volume","dtype":"i32","length":4},
+                        {"name":"MbpSells[4].Price","dtype":"i32","length":4},
+                        {"name":"TotalOrderVolume.Buy","dtype":"f64","length":8},
+                        {"name":"TotalOrderVolume.Sell","dtype":"f64","length":8},
+                        {"name":"OpenPriceDifference","dtype":"i32","length":4},
+                        {"name":"DayHighPriceDifference","dtype":"i32","length":4},
+                        {"name":"DayLowPriceDifference","dtype":"i32","length":4},
+                        {"name":"LastTradedPriceDifference","dtype":"i32","length":4},
+                        {"name":"LastUpdateTime","dtype":"i32","length":4}
                     ]
                 },
                 "6541": {
@@ -835,7 +835,7 @@
                         },
                         {
                             "name": "LogTime",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -856,7 +856,7 @@
                         },
                         {
                             "name": "BCSeqNo",
-                            "dtype": "s_int",
+                            "dtype": "i32",
                             "length": 4
                         },
                         {
@@ -886,6 +886,319 @@
                         }
                     ]
                 },
+                "7130": {
+                    "expected_size": 0,
+                    "skip_bytes": 8,
+                    "columns": [
+                        {"name":"Reserved","dtype":"char","length":2},
+                        {"name":"Reserved","dtype":"char","length":2},
+                        {"name":"LogTime","dtype":"i32","length":4},
+                        {"name":"MarketType","dtype":"char","length":2},
+                        {"name":"TransactionCode","dtype":"short","length":2},
+                        {"name":"NoOfRecords","dtype":"short","length":2},
+                        {"name":"Reserved","dtype":"char","length":8},
+                        {"name":"Reserved","dtype":"char","length":8},
+                        {"name":"MessageLength","dtype":"short","length":2},
+                        {"name":"OPEN_INTEREST[0].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[0].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[1].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[1].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[2].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[2].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[3].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[3].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[4].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[4].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[5].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[5].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[6].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[6].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[7].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[7].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[8].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[8].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[9].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[9].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[10].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[10].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[11].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[11].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[12].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[12].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[13].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[13].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[14].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[14].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[15].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[15].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[16].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[16].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[17].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[17].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[18].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[18].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[19].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[19].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[20].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[20].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[21].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[21].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[22].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[22].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[23].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[23].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[24].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[24].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[25].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[25].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[26].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[26].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[27].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[27].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[28].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[28].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[29].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[29].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[30].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[30].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[31].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[31].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[32].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[32].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[33].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[33].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[34].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[34].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[35].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[35].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[36].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[36].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[37].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[37].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[38].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[38].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[39].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[39].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[40].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[40].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[41].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[41].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[42].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[42].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[43].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[43].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[44].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[44].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[45].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[45].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[46].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[46].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[47].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[47].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[48].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[48].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[49].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[49].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[50].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[50].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[51].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[51].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[52].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[52].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[53].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[53].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[54].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[54].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[55].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[55].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[56].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[56].CurrentOI","dtype":"u32","length":4},
+                        {"name":"OPEN_INTEREST[57].TokenNo","dtype":"i32","length":4},
+                        {"name":"OPEN_INTEREST[57].CurrentOI","dtype":"u32","length":4}
+                    ]
+                },
+                "6501": {
+                    "expected_size": 0,
+                    "skip_bytes": 8,
+                    "columns": [
+                        {"name":"BCAST_HEADER.Reserved","dtype":"char","length":2},
+                        {"name":"BCAST_HEADER.Reserved","dtype":"char","length":2},
+                        {"name":"BCAST_HEADER.LogTime","dtype":"i32","length":4},
+                        {"name":"BCAST_HEADER.AlphaChar","dtype":"char","length":2},
+                        {"name":"BCAST_HEADER.TransactionCode","dtype":"short","length":2},
+                        {"name":"BCAST_HEADER.ErrorCode","dtype":"short","length":2},
+                        {"name":"BCAST_HEADER.BCSeqNo","dtype":"i32","length":4},
+                        {"name":"BCAST_HEADER.Reserved","dtype":"char","length":1},
+                        {"name":"BCAST_HEADER.Reserved","dtype":"char","length":3},
+                        {"name":"BCAST_HEADER.TimeStamp2","dtype":"char","length":8},
+                        {"name":"BCAST_HEADER.Filler2","dtype":"char","length":8},
+                        {"name":"BCAST_HEADER.MessageLength","dtype":"short","length":2},
+                        {"name":"BranchNumber","dtype":"short","length":2},
+                        {"name":"BrokerNumber","dtype":"char","length":5},
+                        {"name":"ActionCode","dtype":"char","length":3},
+                        {"name":"ST_BCAST_DESTINATION.TraderWorkStation","dtype":"bit","length":1},
+                        {"name":"ST_BCAST_DESTINATION.ControlWorkStation","dtype":"bit","length":1},
+                        {"name":"ST_BCAST_DESTINATION.Tandem","dtype":"bit","length":1},
+                        {"name":"ST_BCAST_DESTINATION.JournallingRequired","dtype":"bit","length":1},
+                        {"name":"ST_BCAST_DESTINATION.Reserved","dtype":"bit","length":4},
+                        {"name":"ST_BCAST_DESTINATION.Reserved","dtype":"char","length":1},
+                        {"name":"Reserved","dtype":"char","length":26},
+                        {"name":"BroadcastMessageLength","dtype":"short","length":2},
+                        {"name":"BroadcastMessage","dtype":"char","length":239}
+                    ]
+                },
+                "6521": {
+                    "expected_size": 0,
+                    "skip_bytes": 8,
+                    "columns": [
+                        {"name":"BCAST_HEADER.Reserved","dtype":"char","length":2},
+                        {"name":"BCAST_HEADER.Reserved","dtype":"char","length":2},
+                        {"name":"BCAST_HEADER.LogTime","dtype":"i32","length":4},
+                        {"name":"BCAST_HEADER.AlphaChar","dtype":"char","length":2},
+                        {"name":"BCAST_HEADER.TransactionCode","dtype":"short","length":2},
+                        {"name":"BCAST_HEADER.ErrorCode","dtype":"short","length":2},
+                        {"name":"BCAST_HEADER.BCSeqNo","dtype":"i32","length":4},
+                        {"name":"BCAST_HEADER.Reserved","dtype":"char","length":1},
+                        {"name":"BCAST_HEADER.Reserved","dtype":"char","length":3},
+                        {"name":"BCAST_HEADER.TimeStamp2","dtype":"char","length":8},
+                        {"name":"BCAST_HEADER.Filler2","dtype":"char","length":8},
+                        {"name":"BCAST_HEADER.MessageLength","dtype":"short","length":2},
+                        {"name":"Token","dtype":"i32","length":4},
+                        {"name":"SEC_INFO.InstrumentName","dtype":"char","length":6},
+                        {"name":"SEC_INFO.Symbol","dtype":"char","length":10},
+                        {"name":"SEC_INFO.Series","dtype":"char","length":2},
+                        {"name":"SEC_INFO.ExpiryDate","dtype":"i32","length":4},
+                        {"name":"SEC_INFO.StrikePrice","dtype":"i32","length":4},
+                        {"name":"SEC_INFO.OptionType","dtype":"char","length":2},
+                        {"name":"SEC_INFO.CALevel","dtype":"short","length":2},
+                        {"name":"MarketType","dtype":"short","length":2},
+                        {"name":"ST_BCAST_DESTINATION.TraderWorkStation","dtype":"bit","length":1},
+                        {"name":"ST_BCAST_DESTINATION.ControlWorkStation","dtype":"bit","length":1},
+                        {"name":"ST_BCAST_DESTINATION.Tandem","dtype":"bit","length":1},
+                        {"name":"ST_BCAST_DESTINATION.JournallingRequired","dtype":"bit","length":1},
+                        {"name":"ST_BCAST_DESTINATION.Reserved","dtype":"bit","length":4},
+                        {"name":"ST_BCAST_DESTINATION.Reserved","dtype":"char","length":1},
+                        {"name":"BroadcastMessageLength","dtype":"short","length":2},
+                        {"name":"BroadcastMessage","dtype":"char","length":239}
+                    ]
+                },
+                "7306": {
+                    "expected_size": 0,
+                    "skip_bytes": 8,
+                    "columns": [
+                        {"name":"BCAST_HEADER.Reserved","dtype":"char","length":2},
+                        {"name":"BCAST_HEADER.Reserved","dtype":"char","length":2},
+                        {"name":"BCAST_HEADER.LogTime","dtype":"i32","length":4},
+                        {"name":"BCAST_HEADER.AlphaChar","dtype":"char","length":2},
+                        {"name":"BCAST_HEADER.TransactionCode","dtype":"short","length":2},
+                        {"name":"BCAST_HEADER.ErrorCode","dtype":"short","length":2},
+                        {"name":"BCAST_HEADER.BCSeqNo","dtype":"i32","length":4},
+                        {"name":"BCAST_HEADER.Reserved","dtype":"char","length":1},
+                        {"name":"BCAST_HEADER.Reserved","dtype":"char","length":3},
+                        {"name":"BCAST_HEADER.TimeStamp2","dtype":"char","length":8},
+                        {"name":"BCAST_HEADER.Filler2","dtype":"char","length":8},
+                        {"name":"BCAST_HEADER.MessageLength","dtype":"short","length":2},
+                        {"name":"ParticipantId","dtype":"char","length":12},
+                        {"name":"ParticipantName","dtype":"char","length":25},
+                        {"name":"ParticipantStatus","dtype":"char","length":1},
+                        {"name":"ParticipantUpdateDateTime","dtype":"i32","length":4},
+                        {"name":"DeleteFlag","dtype":"char","length":1}
+                    ]
+                },
+                "1833": {
+                    "expected_size": 0,
+                    "skip_bytes": 8,
+                    "columns": [
+                        {"name":"MESSAGE_HEADER.TransactionCode","dtype":"short","length":2},
+                        {"name":"MESSAGE_HEADER.LogTime","dtype":"i32","length":4},
+                        {"name":"MESSAGE_HEADER.AlphaChar","dtype":"char","length":2},
+                        {"name":"MESSAGE_HEADER.TraderId","dtype":"i32","length":4},
+                        {"name":"MESSAGE_HEADER.ErrorCode","dtype":"short","length":2},
+                        {"name":"MESSAGE_HEADER.Timestamp","dtype":"i64","length":8},
+                        {"name":"MESSAGE_HEADER.TimeStamp1","dtype":"char","length":8},
+                        {"name":"MESSAGE_HEADER.TimeStamp2","dtype":"char","length":8},
+                        {"name":"MESSAGE_HEADER.MessageLength","dtype":"short","length":2},
+                        {"name":"MessageType","dtype":"char","length":1},
+                        {"name":"ReportDate","dtype":"i32","length":4},
+                        {"name":"UserType","dtype":"short","length":2},
+                        {"name":"BrokerId","dtype":"char","length":5},
+                        {"name":"FirmName","dtype":"char","length":25},
+                        {"name":"TraderNumber","dtype":"i32","length":4},
+                        {"name":"TraderName","dtype":"char","length":26}
+                    ]
+                },
+                "1862": {
+                    "expected_size": 0,
+                    "skip_bytes": 8,
+                    "columns": [
+                        {"name":"MESSAGE_HEADER.TransactionCode","dtype":"short","length":2},
+                        {"name":"MESSAGE_HEADER.LogTime","dtype":"i32","length":4},
+                        {"name":"MESSAGE_HEADER.AlphaChar","dtype":"char","length":2},
+                        {"name":"MESSAGE_HEADER.TraderId","dtype":"i32","length":4},
+                        {"name":"MESSAGE_HEADER.ErrorCode","dtype":"short","length":2},
+                        {"name":"MESSAGE_HEADER.Timestamp","dtype":"i64","length":8},
+                        {"name":"MESSAGE_HEADER.TimeStamp1","dtype":"char","length":8},
+                        {"name":"MESSAGE_HEADER.TimeStamp2","dtype":"char","length":8},
+                        {"name":"MESSAGE_HEADER.MessageLength","dtype":"short","length":2},
+                        {"name":"MessageType","dtype":"char","length":1},
+                        {"name":"Reserved","dtype":"char","length":1},
+                        {"name":"NoOfRecords","dtype":"short","length":2},
+                        {"name":"SPD_STATS_DATA[0].MARKETTYPE","dtype":"short","length":2},
+                        {"name":"SPD_STATS_DATA[0].INSTRUMENTNAME1","dtype":"char","length":6},
+                        {"name":"SPD_STATS_DATA[0].SYMBOL1","dtype":"char","length":10},
+                        {"name":"SPD_STATS_DATA[0].EXPIRYDATE1","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[0].STRIKEPRICE1","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[0].OPTIONTYPE1","dtype":"char","length":2},
+                        {"name":"SPD_STATS_DATA[0].CALEVEL1","dtype":"short","length":2},
+                        {"name":"SPD_STATS_DATA[0].INSTRUMENTNAME2","dtype":"char","length":6},
+                        {"name":"SPD_STATS_DATA[0].SYMBOL2","dtype":"char","length":10},
+                        {"name":"SPD_STATS_DATA[0].EXPIRYDATE2","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[0].STRIKEPRICE2","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[0].OPTIONTYPE2","dtype":"char","length":2},
+                        {"name":"SPD_STATS_DATA[0].CALEVEL2","dtype":"short","length":2},
+                        {"name":"SPD_STATS_DATA[0].OPENPD","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[0].HIPD","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[0].LOWPD","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[0].LASTTRADEDPD","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[0].NOOFCONTRACTSTRADED","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[1].MARKETTYPE","dtype":"short","length":2},
+                        {"name":"SPD_STATS_DATA[1].INSTRUMENTNAME1","dtype":"char","length":6},
+                        {"name":"SPD_STATS_DATA[1].SYMBOL1","dtype":"char","length":10},
+                        {"name":"SPD_STATS_DATA[1].EXPIRYDATE1","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[1].STRIKEPRICE1","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[1].OPTIONTYPE1","dtype":"char","length":2},
+                        {"name":"SPD_STATS_DATA[1].CALEVEL1","dtype":"short","length":2},
+                        {"name":"SPD_STATS_DATA[1].INSTRUMENTNAME2","dtype":"char","length":6},
+                        {"name":"SPD_STATS_DATA[1].SYMBOL2","dtype":"char","length":10},
+                        {"name":"SPD_STATS_DATA[1].EXPIRYDATE2","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[1].STRIKEPRICE2","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[1].OPTIONTYPE2","dtype":"char","length":2},
+                        {"name":"SPD_STATS_DATA[1].CALEVEL2","dtype":"short","length":2},
+                        {"name":"SPD_STATS_DATA[1].OPENPD","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[1].HIPD","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[1].LOWPD","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[1].LASTTRADEDPD","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[1].NOOFCONTRACTSTRADED","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[2].MARKETTYPE","dtype":"short","length":2},
+                        {"name":"SPD_STATS_DATA[2].INSTRUMENTNAME1","dtype":"char","length":6},
+                        {"name":"SPD_STATS_DATA[2].SYMBOL1","dtype":"char","length":10},
+                        {"name":"SPD_STATS_DATA[2].EXPIRYDATE1","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[2].STRIKEPRICE1","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[2].OPTIONTYPE1","dtype":"char","length":2},
+                        {"name":"SPD_STATS_DATA[2].CALEVEL1","dtype":"short","length":2},
+                        {"name":"SPD_STATS_DATA[2].INSTRUMENTNAME2","dtype":"char","length":6},
+                        {"name":"SPD_STATS_DATA[2].SYMBOL2","dtype":"char","length":10},
+                        {"name":"SPD_STATS_DATA[2].EXPIRYDATE2","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[2].STRIKEPRICE2","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[2].OPTIONTYPE2","dtype":"char","length":2},
+                        {"name":"SPD_STATS_DATA[2].CALEVEL2","dtype":"short","length":2},
+                        {"name":"SPD_STATS_DATA[2].OPENPD","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[2].HIPD","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[2].LOWPD","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[2].LASTTRADEDPD","dtype":"i32","length":4},
+                        {"name":"SPD_STATS_DATA[2].NOOFCONTRACTSTRADED","dtype":"i32","length":4}
+                    ]
+                },
                 "1": {
                     "expected_size": 256,
                     "columns": []
@@ -896,7 +1209,7 @@
     "native_columns": [
         {
             "name": "id",
-            "dtype": "u_int",
+            "dtype": "u32",
             "offset": 0,
             "length": 4
         },
@@ -914,7 +1227,7 @@
         },
         {
             "name": "points",
-            "dtype": "float",
+            "dtype": "f64",
             "offset": 11,
             "length": 8
         }

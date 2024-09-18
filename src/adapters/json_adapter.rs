@@ -12,8 +12,8 @@ impl Readable for JsonAdapter {
         &self,
         file_path: &String,
         _config: &crate::Config,
-        from: Option<usize>,
-        len: usize,
+        from: Option<u64>,
+        len: u64,
     ) -> Result<Vec<Map<String, Value>>, Box<dyn Error>> {
         // Create file reader
         let file = File::open(file_path)?;
@@ -24,11 +24,11 @@ impl Readable for JsonAdapter {
 
         // Set from and to
         // min ensures it is within bounds
-        let length = data.len();
+        let length = data.len() as u64;
         let from = from.unwrap_or(0).min(length);
         let to = (from + len).min(length);
 
-        let data = data[from..to].iter().map(|i| i.clone()).collect::<Vec<_>>();
+        let data = data[from as usize..to as usize].iter().map(|i| i.clone()).collect::<Vec<_>>();
 
         Ok(data)
     }

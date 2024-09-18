@@ -1,19 +1,19 @@
-use std::time::Instant;
+use std::{time::Instant, u64};
 
 use reader::Reader;
 
 fn main() {
     // Assign reader adapters here
     let reader = Reader::new(
-        "/home/appadmin/Work/generic_reader/config_eq.json".to_string(),
-        "out_eq.txt".to_string(),
+        "/home/appadmin/Work/generic_reader/config_fao.json".to_string(),
+        "out3_fao.txt".to_string(),
         reader::Type::MultiNative,
     )
     .unwrap();
 
     let start = Instant::now();
 
-    let data = reader.read(Some(7853), Some(1)).unwrap();
+let data = reader.read(None, None).unwrap();
 
     println!(
         "{:?} for {:?} values\n {:?} per iter",
@@ -32,7 +32,7 @@ fn main() {
     println!("Data: ");
     for i in data {
         for (k, v) in i {
-            println!("\t{k}: {v}");
+            // println!("\t{k}: {v}");
         }
     }
 }

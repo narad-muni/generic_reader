@@ -12,8 +12,8 @@ impl Readable for JsonArrayAdapter {
         &self,
         file_path: &String,
         config: &crate::Config,
-        from: Option<usize>,
-        len: usize,
+        from: Option<u64>,
+        len: u64,
     ) -> Result<Vec<Map<String, Value>>, Box<dyn Error>> {
         // Create file reader
         let file = File::open(file_path)?;
@@ -24,7 +24,7 @@ impl Readable for JsonArrayAdapter {
 
         // Set from and to
         // min ensures it is within bounds
-        let length = values.len();
+        let length = values.len() as u64;
         let mut from = from.unwrap_or(0).min(length);
         let mut to = (from + len).min(length);
 
@@ -50,7 +50,7 @@ impl Readable for JsonArrayAdapter {
         let mut data = vec![];
 
         // Collect data from slice
-        values[from..to].into_iter().for_each(|val| {
+        values[from as usize..to as usize].into_iter().for_each(|val| {
             let mut hashmap = Map::new();
 
             for i in 0..val.len() {

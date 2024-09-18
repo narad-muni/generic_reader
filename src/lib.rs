@@ -1,4 +1,4 @@
-use std::{collections::HashMap, default, error::Error, fmt::Debug, fs};
+use std::{collections::HashMap, error::Error, fmt::Debug, fs};
 
 use adapters::{
     csv_adapter::CsvAdapter, json_lines_adapter::JsonLineAdapter,
@@ -98,16 +98,19 @@ pub enum Type {
 #[derive(Debug, Default, Deserialize, Clone, PartialEq)]
 #[serde(rename_all = "snake_case")]
 pub enum DType {
-    Char,
-    UInt,
-    Short,
-    SInt,
-    Float,
-    Bool,
-    Byte,
-    Bit,
+    Char, // 1 byte
+    U32, // 4 bytes
+    U64, // 8 bytes
+    Short, // 2 bytes
+    I32, // 4 bytes
+    I64, // 8 bytes
+    F32, // 4 bytes
+    F64, // 8 bytes
+    Bool, // 1 byte
+    Byte, // N bytes
+    Bit, // N Bits
     #[default]
-    None,
+    None, // N bytes
 }
 
 #[derive(Debug, Deserialize)]
@@ -165,13 +168,13 @@ impl Reader {
 
     pub fn read(
         &self,
-        from: Option<usize>,
-        len: Option<usize>,
+        from: Option<u64>,
+        len: Option<u64>,
     ) -> Result<Vec<Map<String, Value>>, Box<dyn Error>> {
         // Get adapter from mapping
         let adapter = get_adapter(&self._type);
 
-        let len = len.unwrap_or(10);
+        let len = len.unwrap_or(u64::MAX);
 
         adapter.read(&self.file_path, &self.config, from, len)
     }
@@ -232,7 +235,7 @@ pub trait Readable: Send + Sync + Debug {
         &self,
         file_path: &String,
         config: &Config,
-        from: Option<usize>,
-        len: usize,
+        from: Option<u64>,
+        len: u64,
     ) -> Result<Vec<Map<String, Value>>, Box<dyn Error>>;
 }

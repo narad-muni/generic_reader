@@ -13,8 +13,8 @@ impl Readable for CsvAdapter {
         &self,
         file_path: &String,
         config: &crate::Config,
-        from: Option<usize>,
-        len: usize,
+        from: Option<u64>,
+        len: u64,
     ) -> Result<Vec<Map<String, Value>>, Box<dyn Error>> {
         // Create file reader
         let file = File::open(file_path)?;
@@ -40,7 +40,7 @@ impl Readable for CsvAdapter {
         let mut data = vec![];
 
         // Iter through slice of data and collect values
-        for record in reader.records().skip(from).take(len) {
+        for record in reader.records().skip(from as usize).take(len as usize) {
             let record = record?;
 
             let mut hashmap = Map::new();

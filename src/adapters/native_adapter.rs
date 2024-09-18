@@ -18,8 +18,8 @@ impl Readable for NativeAdapter {
         &self,
         file_path: &String,
         config: &crate::Config,
-        from: Option<usize>,
-        len: usize,
+        from: Option<u64>,
+        len: u64,
     ) -> Result<Vec<Map<String, Value>>, Box<dyn Error>> {
         // Create file reader and BufReader
         let file = File::open(file_path)?;
@@ -49,7 +49,7 @@ impl Readable for NativeAdapter {
         // Seek till n packets, where n = form
         // Which is calculated by (from * packet_size)
         // Seek takes n bytes
-        buf_reader.seek(SeekFrom::Start((from * packet_size) as u64))?;
+        buf_reader.seek(SeekFrom::Start(from * packet_size as u64))?;
 
         let mut data = vec![];
         let mut pos = 0;

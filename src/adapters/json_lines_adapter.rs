@@ -16,8 +16,8 @@ impl Readable for JsonLineAdapter {
         &self,
         file_path: &String,
         _config: &crate::Config,
-        from: Option<usize>,
-        len: usize,
+        from: Option<u64>,
+        len: u64,
     ) -> Result<Vec<Map<String, Value>>, Box<dyn Error>> {
         // Create file reader with BufReader
         let file = File::open(&file_path)?;
@@ -40,7 +40,7 @@ impl Readable for JsonLineAdapter {
         // Skip from lines and take (to - from) lines
         let mut data = vec![];
 
-        for line in lines.skip(from).take(len) {
+        for line in lines.skip(from as usize).take(len as usize) {
             if let Ok(line) = line {
                 // Decode each line as json
                 let json_obj = serde_json::from_str::<Map<String, Value>>(&line)?;
